@@ -1,16 +1,11 @@
 import psycopg2
-import logging
 from datetime import datetime
 from config import *
 
 
-# Logger
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-
 class User:
     def __init__(self):
+        # loading from config
         try:
             self.conn = psycopg2.connect(
                 host=DB_HOST,
@@ -19,12 +14,13 @@ class User:
                 password=DB_PASSWORD)
             self.cursor = self.conn.cursor()
         except psycopg2.Error as e:
-            logger.error(f"Error connection SQL: {e}")
-            raise
+            return None
 
     # Получаем любой(ые) элемент(ы) из таблицы users
+    # IMPORT FROM OLD CODE AND MODIFED
     def get_user_args(self, chat_id, *args):
         data = dict()
+
         with self.conn:
             for key in args:
                 try:
@@ -34,7 +30,7 @@ class User:
                     for row in result:
                         data[key] = str(row[0])
                 except psycopg2.Error as e:
-                    logger.error(f"Error executing SQL query:: {e}")
+                    return None
             return data
 
     def get_by_id(self, chat_id):
@@ -63,7 +59,6 @@ class User:
             else:
                 return None
         except psycopg2.Error as e:
-            print(f"Error executing SQL query: {e}")
             return None
 
     def create(self, params):

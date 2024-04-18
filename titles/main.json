@@ -1,7 +1,7 @@
 {
     "en": {
         "start_greetings_first": {
-            "text": "Hi, Im bot <b>Rafa</b>! Lets make your profile. \nWhats is your name ?"
+            "text": "Hi, Im bot <b>Rafa</b>! Lets make your profile."
         },
         "start_greetings": {
             "text": "Welcome back, <b>%var%</b>! \nHow are you? I hope great, let's get is started!"
@@ -9,8 +9,20 @@
         "reg_first_name": {
             "text": "Please tell me what's your name?"
         },
+        "reg_first_name_fail": {
+            "text": "Please enter your name in the correct format. \nThe name must consist of Cyrillic or Latin characters, please correct"
+        },
         "reg_last_name": {
             "text": "Well done, <b>%var%</b>! So tell me your last_name?"
+        },
+        "reg_last_name_fail": {
+            "text": "Please enter your last name in the correct format. \nThe last name must consist of Cyrillic or Latin characters, please correct"
+        },
+        "reg_tennis_experience": {
+            "text": "Супер, %var%, рад знакомству! \nЯ за неформальную обстановку, поэтому буду на \"ты\", если не возражаешь(p.s. если что пиши разработчикам, я просто робот).\n\nНапиши, как давно играешь в теннис? Сколько лет или месяцев ты активно занимаешься теннисом?\n\nПример:То есть если с 6 до 14 лет ты занимался и сейчас решил вернуться, то это значит у тебя опыт где-то 8 лет"
+        },
+        "reg_ntrp": {
+            "text": "Do you know your NTRP level?"
         },
         "reg_finish": {
             "text": "Omg you are so awesome, greate job, Registration is done!"

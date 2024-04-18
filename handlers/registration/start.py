@@ -8,6 +8,7 @@ from aiogram import html
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 from titles import title
+import time
 
 
 def run(dp):
@@ -26,9 +27,12 @@ def run(dp):
 
             # show menu here
         else:
-            message_out = title.load_title('start_greetings_first')
+            message_out_greetings = title.load_title('start_greetings_first')
+            message_out_reg_fn = title.load_title('reg_first_name')
 
-            await message.answer(message_out)
+            await message.answer(message_out_greetings)
+            time.sleep(2)
+            await message.answer(message_out_reg_fn)
             await state.set_state(Registration.first_name)
 
     @dp.message(Registration.first_name)

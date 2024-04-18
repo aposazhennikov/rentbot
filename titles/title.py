@@ -12,13 +12,15 @@ def load_json():
 
 
 def load_title(title_name, var=None):
+    # lang is loading from config, but we should make in db or temp file for each users
     language = USER_LANGUAGE
     translations = load_json()
 
     if language in translations and title_name in translations[language]:
         text_out = translations[language][title_name].get('text')
+
+        # here is we can make loop but I dont see a reason for this now
         if var:
-            print(f'var: {var}')
             text_out = re.sub('%var%', var, text_out)
         return text_out
     else:
