@@ -1,0 +1,30 @@
+{
+    "en": {
+        "welcome_back": {
+            "text": "Welcome back"
+        },
+        "reg_first_name": {
+            "text": "Hello newbie, please tell me what's your name?"
+        },
+        "reg_last_name": {
+            "text": "Well done, how is your last_name?"
+        },
+        "reg_finish": {
+            "text": "Omg you are so awesome, greate job, Registration is done!"
+        }
+    },
+    "ru": {
+        "welcome_back": {
+            "text": "С возвращением"
+        },
+        "reg_first_name": {
+            "text": "Привет новенький! Давай знакомиться как твоё имя?"
+        },
+        "reg_last_name": {
+            "text": "Превосходно, а как твоя Фамилия?"
+        },
+        "reg_finish": {
+            "text": "Отличная работа, регистрация завершена!"
+        }
+    }
+}

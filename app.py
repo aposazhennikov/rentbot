@@ -8,7 +8,7 @@ from aiogram.enums import ParseMode
 
 from config import *
 
-# All handlers should be attached to the Router (or Dispatcher)
+# All handlers should be attached  to the Router (or Dispatcher)
 if BOT_TOKEN:
     dp = Dispatcher()
 
@@ -21,6 +21,7 @@ if BOT_TOKEN:
 
     if __name__ == "__main__":
         from handlers.registration import *
+
         logging.basicConfig(level=logging.INFO, stream=sys.stdout)
         asyncio.run(main())
 else:
