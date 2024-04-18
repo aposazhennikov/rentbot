@@ -1,27 +1,45 @@
 {
     "en": {
-        "welcome_back": {
-            "text": "Welcome back"
+        "start_greetings_first": {
+            "text": "Hi, Im bot <b>Rafa</b>! Lets make your profile. \nWhats is your name ?"
+        },
+        "start_greetings": {
+            "text": "Welcome back, <b>%var%</b>! \nHow are you? I hope great, let's get is started!"
         },
         "reg_first_name": {
-            "text": "Hello newbie, please tell me what's your name?"
+            "text": "Please tell me what's your name?"
         },
         "reg_last_name": {
-            "text": "Well done, how is your last_name?"
+            "text": "Well done, <b>%var%</b>! So tell me your last_name?"
         },
         "reg_finish": {
             "text": "Omg you are so awesome, greate job, Registration is done!"
         }
     },
     "ru": {
-        "welcome_back": {
-            "text": "С возвращением"
+        "start_greetings_first": {
+            "text": "Привет. Меня зовут бот Рафа и я буду твоим проводником и помощником по теннисным тренировкам на корте в Овсянниковском саду. Только сначала давай ты расскажешь немного о себе, а потом я покажу тебе как записаться на корт и другие возможности."
+        },
+        "start_greetings": {
+            "text": "Привет. Меня зовут бот Рафа и я буду твоим проводником и помощником по теннисным тренировкам на корте в Овсянниковском саду."
         },
         "reg_first_name": {
-            "text": "Привет новенький! Давай знакомиться как твоё имя?"
+            "text": "Представься, как тебя зовут? Напиши свое Имя"
+        },
+        "reg_first_name_fail": {
+            "text": "Укажи имя в правильном формате. \nИмя должно состоять из символов кириллицы или латиницы, скорректируйте пожалуйста"
         },
         "reg_last_name": {
-            "text": "Превосходно, а как твоя Фамилия?"
+            "text": "Отлично. %var% , скажи еще фамилию?"
+        },
+        "reg_last_name_fail": {
+            "text": "Укажи фамилию в правильном формате. \nФамилия должна состоять из символов кириллицы или латиницы скорректируйте пожалуйста"
+        },
+        "reg_tennis_experience": {
+            "text": "Супер, %var%, рад знакомству! \nЯ за неформальную обстановку, поэтому буду на \"ты\", если не возражаешь(p.s. если что пиши разработчикам, я просто робот).\n\nНапиши, как давно играешь в теннис? Сколько лет или месяцев ты активно занимаешься теннисом?\n\nПример:То есть если с 6 до 14 лет ты занимался и сейчас решил вернуться, то это значит у тебя опыт где-то 8 лет"
+        },
+        "reg_ntrp": {
+            "text": "Знаешь свой уровень NTRP?"
         },
         "reg_finish": {
             "text": "Отличная работа, регистрация завершена!"

@@ -7,7 +7,6 @@ from models.user import User
 from aiogram import html
 from aiogram.filters import CommandStart
 from aiogram.types import Message
-from handlers.registration import start
 from titles import title
 
 
@@ -15,13 +14,19 @@ def run(dp):
     @dp.message(CommandStart())
     async def command_start_handler(message: Message, state: FSMContext) -> None:
         user_manager = User()
-        get_user = user_manager.get_by_id(message.chat.id)
+        # similar funciton, i imported #get_db_args from old and modified it
+        # get_user = user_manager.get_by_id(message.chat.id)
+        get_user = user_manager.get_user_args(
+            message.chat.id, 'first_name')
 
         if (get_user):
-            message_out = title.load_title('welcome_back')
-            await message.answer(f"{message_out}, {html.bold(get_user['first_name'])}!")
+            message_out = title.load_title(
+                'start_greetings', get_user['first_name'])
+            await message.answer(message_out)
+
+            # show menu here
         else:
-            message_out = title.load_title('reg_first_name')
+            message_out = title.load_title('start_greetings_first')
 
             await message.answer(message_out)
             await state.set_state(Registration.first_name)
@@ -31,7 +36,7 @@ def run(dp):
         await state.update_data(first_name=message.text)
         await state.set_state(Registration.last_name)
 
-        message_out = title.load_title('reg_last_name')
+        message_out = title.load_title('reg_last_name', message.text)
         await message.answer(message_out)
 
     @dp.message(Registration.last_name)

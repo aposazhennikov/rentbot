@@ -1,6 +1,7 @@
 import json
 import pathlib
 from config import *
+import re
 
 
 def load_json():
@@ -10,11 +11,15 @@ def load_json():
     return translations
 
 
-def load_title(title_name):
+def load_title(title_name, var=None):
     language = USER_LANGUAGE
     translations = load_json()
 
     if language in translations and title_name in translations[language]:
-        return translations[language][title_name].get('text')
+        text_out = translations[language][title_name].get('text')
+        if var:
+            print(f'var: {var}')
+            text_out = re.sub('%var%', var, text_out)
+        return text_out
     else:
         return None

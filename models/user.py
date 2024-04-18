@@ -1,27 +1,48 @@
 import psycopg2
-
+import logging
 from datetime import datetime
 from config import *
 
 
+# Logger
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
 class User:
     def __init__(self):
-        self.db_host = DB_HOST
-        self.db_name = DB_NAME
-        self.db_user = DB_USER
-        self.db_password = DB_PASSWORD
+        try:
+            self.conn = psycopg2.connect(
+                host=DB_HOST,
+                dbname=DB_NAME,
+                user=DB_USER,
+                password=DB_PASSWORD)
+            self.cursor = self.conn.cursor()
+        except psycopg2.Error as e:
+            logger.error(f"Error connection SQL: {e}")
+            raise
+
+    # Получаем любой(ые) элемент(ы) из таблицы users
+    def get_user_args(self, chat_id, *args):
+        data = dict()
+        with self.conn:
+            for key in args:
+                try:
+                    self.cursor.execute(
+                        f"SELECT {key} FROM api.users WHERE id = %s", (chat_id,))
+                    result = self.cursor.fetchall()
+                    for row in result:
+                        data[key] = str(row[0])
+                except psycopg2.Error as e:
+                    logger.error(f"Error executing SQL query:: {e}")
+            return data
 
     def get_by_id(self, chat_id):
         print(f'get user {chat_id}')
 
         try:
-            with psycopg2.connect(
-                host=self.db_host,
-                dbname=self.db_name,
-                user=self.db_user,
-                password=self.db_password
-            ) as conn:
-                with conn.cursor() as cur:
+            with self.conn as conn:
+                with self.cursor as cur:
                     cur.execute(
                         "SELECT * FROM api.users WHERE id=%s", (chat_id,))
                     result = cur.fetchone()
