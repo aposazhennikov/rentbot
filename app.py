@@ -1,15 +1,17 @@
 import asyncio
-import sys
 import pathlib
+import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-
 from config import *
 
-import logging
+# path log settings
 dir = pathlib.Path(__file__).parent.resolve()
+directory_path = pathlib.Path(f'{dir}/logs')
+if not directory_path.exists():
+    directory_path.mkdir(parents=True, exist_ok=True)
 
 # settings logger
 logger = logging.getLogger()
@@ -23,7 +25,7 @@ console_handler.setLevel(logging.INFO)
 console_handler.setFormatter(formatter)
 
 # file logger
-file_handler = logging.FileHandler(f'{dir}/logs/errors.log')
+file_handler = logging.FileHandler(f'{directory_path}/errors.log')
 file_handler.setLevel(logging.ERROR)
 file_handler.setFormatter(formatter)
 
