@@ -10,9 +10,9 @@ from aiogram.types import Message, CallbackQuery
 from titles import title
 import re
 import time
+from config import *
 
-
-TITLE_CHOICE = "Выбери язык (Choose your language):"
+TITLE_CHOICE = "Выбери язык (Choose a language):"
 
 
 def run(router):
@@ -34,7 +34,7 @@ def run(router):
             user_manager = User()
             get_user = user_manager.get_user_args(chat_id, 'first_name')
 
-            if get_user:
+            if get_user and BOT_MODE != 'dev':
                 message_out = title.load_title(
                     chat_id, 'start_greetings', get_user['first_name'])
                 if message:
@@ -42,6 +42,13 @@ def run(router):
                 elif callback:
                     await callback.message.edit_text(message_out)
             else:
+                if get_user:
+                    message_dev = f"DEV MODE. Hey {get_user['first_name']} 😉 you didnt see this, okay ?"
+                    if message:
+                        await message.answer(message_dev)
+                    elif callback:
+                        await callback.message.answer(message_dev)
+
                 message_out = title.load_title(
                     chat_id, 'start_greetings_first')
                 message_out_reg_fn = title.load_title(

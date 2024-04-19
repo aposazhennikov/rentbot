@@ -9,3 +9,4 @@ DB_PASSWORD = getenv('DB_PASSWORD')
 
 # Bot token
 BOT_TOKEN = getenv('BOT_TOKEN')
+BOT_MODE = 'dev'  # prod

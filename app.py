@@ -8,7 +8,9 @@ from handlers.registration import router
 from logs import rent_logger
 
 # file and console loger $path:/logs/errors.log
-rent_logger.run()
+# this makes the bot slower
+if BOT_MODE == 'dev':
+    rent_logger.run()
 
 # All handlers should be attached  to the Router (or Dispatcher)
 if BOT_TOKEN:
