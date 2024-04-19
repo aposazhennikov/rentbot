@@ -3,10 +3,10 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from titles import title
 
 
-async def inline_ntrp_quest():
+async def inline_ntrp_quest(chat_id):
     # way 1
-    title_btn_yes = title.load_title('reg_ntrp_btn_yes')
-    title_btn_no = title.load_title('reg_ntrp_btn_no')
+    title_btn_yes = title.load_title(chat_id, 'reg_ntrp_btn_yes')
+    title_btn_no = title.load_title(chat_id, 'reg_ntrp_btn_no')
     keyboard_builder = InlineKeyboardBuilder()
 
     btn_yes = InlineKeyboardButton(
@@ -28,10 +28,10 @@ async def inline_ntrp_quest():
     # return keyboard_builder.adjust(2).as_markup()
 
 
-async def inline_ntrp_accept():
+async def inline_ntrp_accept(chat_id):
     # way 2
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=title.load_title('reg_ntrp_btn_accept'),
+        [InlineKeyboardButton(text=title.load_title(chat_id, 'reg_ntrp_btn_accept'),
                               callback_data='reg_ntrpyes'),],
     ])
     return keyboard

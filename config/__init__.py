@@ -11,4 +11,4 @@ DB_PASSWORD = getenv('DB_PASSWORD')
 BOT_TOKEN = getenv('BOT_TOKEN')
 
 # User settings
-USER_LANGUAGE = 'en'  # ru
+USER_LANGUAGE = 'ru'  # ru
