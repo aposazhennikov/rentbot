@@ -6,6 +6,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from config import *
+from handlers.registration import router
 
 # path log settings
 dir = pathlib.Path(__file__).parent.resolve()
@@ -41,11 +42,16 @@ if BOT_TOKEN:
         # Initialize Bot instance with default bot properties which will be passed to all API calls
         bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(
             parse_mode=ParseMode.HTML))
+        # Connect router from handlers
+        dp.include_router(router)
         # And the run events dispatching
         await dp.start_polling(bot)
 
     if __name__ == "__main__":
-        from handlers.registration import *
-        asyncio.run(main())
+        # from handlers.registration import *
+        try:
+            asyncio.run(main())
+        except KeyboardInterrupt:
+            print('Break')
 else:
     print('BOT_TOKEN is not set')

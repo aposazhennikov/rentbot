@@ -19,7 +19,7 @@
             "text": "Please enter your last name in the correct format. \nThe last name must consist of Cyrillic or Latin characters, please correct"
         },
         "reg_tennis_experience": {
-            "text": "Супер, %var%, рад знакомству! \nЯ за неформальную обстановку, поэтому буду на \"ты\", если не возражаешь(p.s. если что пиши разработчикам, я просто робот).\n\nНапиши, как давно играешь в теннис? Сколько лет или месяцев ты активно занимаешься теннисом?\n\nПример:То есть если с 6 до 14 лет ты занимался и сейчас решил вернуться, то это значит у тебя опыт где-то 8 лет"
+            "text": "Super, %var%, nice to meet you! \nI'm for an informal atmosphere, so I'll be on friendly terms if you don't mind (p.s. if you write anything to the developers, I'm just a robot).\n\nTell me how long have you been playing tennis? How many years or months have you been actively involved in tennis?\n\nExample: That is, if from 6 to 14 years old you played and now decided to return, then this means you have about 8 years of experience"
         },
         "reg_ntrp": {
             "text": "Do you know your NTRP level?"

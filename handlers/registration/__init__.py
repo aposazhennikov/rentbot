@@ -1,6 +1,6 @@
-from aiogram import Dispatcher
+from aiogram import Dispatcher, Router
 from handlers.registration import start
 
-dp = Dispatcher()
+router = Router()
 
-start.run(dp)
+start.run(router)
