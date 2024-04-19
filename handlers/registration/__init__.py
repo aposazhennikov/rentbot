@@ -1,4 +1,4 @@
-from aiogram import Dispatcher, Router
+from aiogram import Router
 from handlers.registration import start
 
 router = Router()
