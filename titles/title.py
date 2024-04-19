@@ -4,14 +4,14 @@ from config import *
 import re
 
 
-async def load_json():
+def load_json():
     dir = pathlib.Path(__file__).parent.resolve()
     with open(f"{dir}/main.json", 'r', encoding='utf-8') as file:
         translations = json.load(file)
     return translations
 
 
-async def load_title(title_name, var=None):
+def load_title(title_name, var=None):
     # lang is loading from config, but we should make in db or temp file for each users
     language = USER_LANGUAGE
     translations = load_json()

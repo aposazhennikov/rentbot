@@ -13,7 +13,7 @@ from titles import title
 import time
 
 
-async def run(router):
+def run(router):
     @router.message(CommandStart())
     async def command_start_handler(message: Message, state: FSMContext) -> None:
         user_manager = User()
