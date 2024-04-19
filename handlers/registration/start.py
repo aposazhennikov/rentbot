@@ -4,31 +4,32 @@
 from fsm.registration import Registration
 from aiogram.fsm.context import FSMContext
 from models.user import User
-from aiogram import types, html
 from markups import markup_registration, markup_lang
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, CallbackQuery
 from titles import title
 import re
 import time
-import pathlib
-import json
+
+
+TITLE_CHOICE = "Выбери язык (Choose your language):"
 
 
 def run(router):
     @router.message(Command('help'))
     async def command_help_handler(message: Message) -> None:
-        await message.answer("Выбери язык (Choose your language):", reply_markup=await markup_lang.reply_lang())
+        await message.answer(TITLE_CHOICE, reply_markup=await markup_lang.reply_lang())
 
     async def send_greetings_and_prompt_name(chat_id: int, message: Message = None, callback: CallbackQuery = None, state: FSMContext = None):
         user_language = title.get_user_language(chat_id)
 
         if user_language is None:
             markup = await markup_lang.reply_lang()
+
             if message:
-                await message.answer("Выбери язык (Choose your language):", reply_markup=markup)
+                await message.answer(TITLE_CHOICE, reply_markup=markup)
             elif callback:
-                await callback.message.answer("Выбери язык (Choose your language):", reply_markup=markup)
+                await callback.message.answer(TITLE_CHOICE, reply_markup=markup)
         else:
             user_manager = User()
             get_user = user_manager.get_user_args(chat_id, 'first_name')
@@ -90,8 +91,6 @@ def run(router):
     @router.message(Registration.tennis_experience)
     async def reg_ntrp_quest(message: Message, state: FSMContext):
         await state.update_data(tennis_experience=message.text)
-        # await state.set_state(Registration.ntrp_quest)
-
         message_out = title.load_title(
             message.chat.id, 'reg_ntrp_quest', message.text)
         await message.answer(message_out,  reply_markup=await markup_registration.inline_ntrp_quest(message.chat.id))
@@ -101,7 +100,6 @@ def run(router):
         split = callback.data.split('_')
         prefix, action = split
         await callback.answer(action)
-        # await state.update_data(ntrp_quest=action)
 
         if action == 'ntrpyes':
             message_out = title.load_title(
@@ -124,29 +122,3 @@ def run(router):
 
         await message.answer(message_out)
         await state.clear()
-
-
-'''
-    @router.message(CommandStart())
-    async def command_start_handler(message: Message, state: FSMContext) -> None:
-        user_manager = User()
-        # similar funciton, i imported #get_db_args from old and modified it
-        # get_user = user_manager.get_by_id(message.chat.id)
-        get_user = user_manager.get_user_args(
-            message.chat.id, 'first_name')
-
-        if (get_user):
-            message_out = title.load_title(
-                'start_greetings', get_user['first_name'])
-            await message.answer(message_out)
-
-            # show menu here
-        else:
-            message_out_greetings = title.load_title('start_greetings_first')
-            message_out_reg_fn = title.load_title('reg_first_name')
-
-            await message.answer(message_out_greetings)
-            time.sleep(2)
-            await message.answer(message_out_reg_fn)
-            await state.set_state(Registration.start)
-'''

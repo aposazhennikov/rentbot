@@ -1,8 +1,14 @@
+'''
+This function is making multi languages titles and store data for each users in json
+'''
+
 import json
 import pathlib
 from config import *
 import re
 
+
+# we should make class and __init__ here chat_id, I will do it later
 
 def load_json():
     dir = pathlib.Path(__file__).parent.resolve()
@@ -28,7 +34,6 @@ def load_title(chat_id, title_name, var=None):
 
 
 def save_user_language(chat_id, lang):
-    # Получаем путь к текущему файлу и его родительскую директорию
     dir = pathlib.Path(__file__).parent.resolve()
 
     if not dir.exists():
@@ -36,34 +41,26 @@ def save_user_language(chat_id, lang):
 
     file_path = f"{dir}/user_languages.json"
     data = {}
-
-    # Проверяем существует ли файл и загружаем данные
     if pathlib.Path(file_path).exists():
         with open(file_path, "r") as file:
             data = json.load(file)
 
-    # Обновляем данные
     data[str(chat_id)] = lang
 
-    # Записываем обновленные данные в файл
     with open(file_path, "w") as file:
         json.dump(data, file, indent=4)
 
 
 def get_user_language(chat_id):
-    # Получаем путь к текущему файлу и его родительскую директорию
     dir = pathlib.Path(__file__).parent.resolve()
     file_path = f"{dir}/user_languages.json"
 
-    # Проверяем существует ли файл
     if not pathlib.Path(file_path).exists():
         return None
 
-    # Загружаем данные из файла JSON
     with open(file_path, "r") as file:
         data = json.load(file)
 
-    # Получаем язык пользователя по chat_id
     language = data.get(str(chat_id))
 
     return language

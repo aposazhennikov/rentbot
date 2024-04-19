@@ -7,6 +7,7 @@ from config import *
 from handlers.registration import router
 from logs import rent_logger
 
+# file and console loger $path:/logs/errors.log
 rent_logger.run()
 
 # All handlers should be attached  to the Router (or Dispatcher)
