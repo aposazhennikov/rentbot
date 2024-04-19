@@ -26,3 +26,13 @@ async def inline_ntrp_quest():
     ])
     return keyboard
     # return keyboard_builder.adjust(2).as_markup()
+
+
+async def inline_ntrp_accept():
+    # way 2
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text=title.load_title('reg_ntrp_btn_accept'),
+                              callback_data='reg_ntrpyes'),],
+    ])
+    return keyboard
+    # return keyboard_builder.adjust(2).as_markup()
