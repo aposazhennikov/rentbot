@@ -5,7 +5,7 @@ from fsm.registration import Registration
 from aiogram.fsm.context import FSMContext
 from models.user import User
 from aiogram import types, html
-
+from markups import markup_registration
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 from titles import title
@@ -52,6 +52,14 @@ def run(router):
 
         message_out = title.load_title('reg_tennis_experience', message.text)
         await message.answer(message_out)
+
+    @router.message(Registration.tennis_experience)
+    async def reg_ntrp_quest(message: Message, state: FSMContext):
+        await state.update_data(tennis_experience=message.text)
+        await state.set_state(Registration.ntrp_quest)
+
+        message_out = title.load_title('reg_ntrp_quest', message.text)
+        await message.answer(message_out,  reply_markup=await markup_registration.inline_ntrp_quest())
 
 
 '''
