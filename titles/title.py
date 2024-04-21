@@ -11,6 +11,13 @@ import re
 # we should make class and __init__ here chat_id, I will do it later
 
 def load_json():
+    '''
+    Function return loaded file with different locales
+    This locales contains phrases on different languages, for example:
+    
+    EN start_greetings_first: Hi, Im bot <b>Rafa</b>! Lets make your profile.
+    RU start_greetings_first: Привет. Меня зовут бот Рафа и я буду твоим проводником и помощником по теннисным тренировкам на корте в Овсянниковском саду.
+    '''
     dir = pathlib.Path(__file__).parent.resolve()
     with open(f"{dir}/main.json", 'r', encoding='utf-8') as file:
         translations = json.load(file)
@@ -18,24 +25,31 @@ def load_json():
 
 
 def load_title(chat_id, title_name, var=None):
-    # lang is loading from config, but we should make in db or temp file for each users
+    '''
+    Function takes as input CHAT_ID - this shows us user and TITLE_NAME from loaded JSON,
+    and VAR - this is value, which we can change in TEXT 
+    Function RETURN text from TITLE_NAME, for example:
+    
+     TITLE_NAME:"reg_tennis_experience": {
+            TEXT: "Super, <b>%var%</b>, nice to meet you!"}
+
+    '''
+    # language is loading from config, but we should make in db or temp file for each users
     language = get_user_language(chat_id)
     translations = load_json()
 
     if language in translations and title_name in translations[language]:
         text_out = translations[language][title_name].get('text')
-
-        # here is we can make loop but I dont see a reason for this now
+    # Changing %var% in our string to value, which we get from "var"
         if var:
             text_out = re.sub('%var%', var, text_out)
         return text_out
     else:
-        return None
+        return "Unknown language, or title_name"
 
 
 def save_user_language(chat_id, lang):
     dir = pathlib.Path(__file__).parent.resolve()
-
     if not dir.exists():
         dir.mkdir(parents=True, exist_ok=True)
 
