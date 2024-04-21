@@ -1,7 +1,11 @@
-class Registration(StatesGroup):
+from aiogram.fsm.state import State, StatesGroup
 
+
+class Registration(StatesGroup):
     first_name = State()
     last_name = State()
-    age = State()
+    tennis_experience = State()
+    ntrp_quest = State()
+    ntrp = State()
     phone_number = State()
     description = State()
