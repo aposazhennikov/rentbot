@@ -17,6 +17,7 @@ async def inline_ntrp_quest(chat_id):
         # btn_no = InlineKeyboardButton(text=title_btn_no, callback_data='reg_ntrpno')
         # keyboard_builder.add(btn_yes)
         # keyboard_builder.add(btn_no)
+    # Adjust - указывает сколько кнопок будет в одном ряду!!!
         # keyboard_builder.adjust(2).as_markup()
         # return keyboard_builder.adjust(2).as_markup()
         # Билдеры пригодятся для расписания например, когда у нас разное кол-во кнопок в меню будет...
