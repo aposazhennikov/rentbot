@@ -19,10 +19,12 @@ async def inline_ntrp_quest(chat_id):
         # keyboard_builder.add(btn_no)
         # keyboard_builder.adjust(2).as_markup()
         # return keyboard_builder.adjust(2).as_markup()
+        # Билдеры пригодятся для расписания например, когда у нас разное кол-во кнопок в меню будет...
     # way 2
+    # Тут списками регулируется положение кнопок, сколько в одном ряду будет кнопок [btn1, btn2] - две кнопки в одном ряду.
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
-                        InlineKeyboardButton(text=title_btn_yes, callback_data='reg_ntrpyes'),
-                        InlineKeyboardButton(text=title_btn_no, callback_data='reg_ntrpno')])
+                        [InlineKeyboardButton(text=title_btn_yes, callback_data='reg_ntrpyes'),
+                        InlineKeyboardButton(text=title_btn_no, callback_data='reg_ntrpno')]])
     return keyboard
    
 
@@ -31,7 +33,7 @@ async def inline_ntrp_accept(chat_id):
     ''' NEED TO ADD DESCRIPTION '''
     # way 2
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
-                        InlineKeyboardButton(text=title.load_title(chat_id, 'reg_ntrp_btn_accept'),
-                              callback_data='reg_ntrpyes')])
+                        [InlineKeyboardButton(text=title.load_title(chat_id, 'reg_ntrp_btn_accept'),
+                              callback_data='reg_ntrpyes')]])
     return keyboard
     # return keyboard_builder.adjust(2).as_markup()
