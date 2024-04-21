@@ -13,7 +13,7 @@
             "text": "Please enter your name in the correct format. \nThe name must consist of Cyrillic or Latin characters, please correct"
         },
         "reg_last_name": {
-            "text": "Well done, <b>%var%</b>! So tell me your last_name?"
+            "text": "Well done, <b>%var%</b>! So tell me your last name?"
         },
         "reg_last_name_fail": {
             "text": "Please enter your last name in the correct format. \nThe last name must consist of Cyrillic or Latin characters, please correct"
