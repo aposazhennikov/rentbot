@@ -7,12 +7,12 @@ import re
 from handlers.registration import start
 
 
-def run(router):
+
+# Тут бы пояснения что лямбда делает...
+@router.callback_query(lambda c: re.match(r'reg_', c.data))
+async def handle_reg_callback(callback: CallbackQuery):
     ''' NEED TO ADD DESCRIPTION '''
-    # Тут бы пояснения что лямбда делает...
-    @router.callback_query(lambda c: re.match(r'reg_', c.data))
-    async def handle_reg_callback(callback: CallbackQuery):
-        split = callback.data.split('_')
-        prefix, action = split
-        await callback.answer('OK')
-        start.reg_ntrp(callback)
+    split = callback.data.split('_')
+    prefix, action = split
+    await callback.answer('OK')
+    start.reg_ntrp(callback)
