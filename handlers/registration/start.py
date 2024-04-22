@@ -16,7 +16,7 @@ from config import *
 from models.user import User
 
 # Markup_registration has inline_ntrp_quest & inline_ntrp_accept methods, which input chat_id and returns keyboards with btns
-# Markup_lang has reply_lang which returns keyboards with lang choose en/ru 
+# Markup_lang has reply_lang which returns keyboards with lang choose en/ru
 from markups import markup_registration, markup_lang
 
 # Contains load_json, load_title, save_user_language methods which works with translation list of main phrases
@@ -30,7 +30,7 @@ def run(router):
     ''' NEED TO ADD DESCRIPTION '''
     @router.message(Command('help'))
     async def command_help_handler(message: Message) -> None:
-            ''' NEED TO ADD DESCRIPTION '''
+        ''' NEED TO ADD DESCRIPTION '''
         await message.answer(TITLE_CHOICE, reply_markup=await markup_lang.reply_lang())
 
     async def send_greetings_and_prompt_name(chat_id: int, message: Message = None, callback: CallbackQuery = None, state: FSMContext = None):
@@ -96,7 +96,7 @@ def run(router):
 
     @router.message(Registration.first_name)
     async def reg_first_name(message: Message, state: FSMContext):
-        ''' NEED TO ADD DESCRIPTION '''  
+        ''' NEED TO ADD DESCRIPTION '''
         await state.set_state(Registration.last_name)
         await state.update_data(first_name=message.text)
         message_out = title.load_title(
@@ -105,19 +105,20 @@ def run(router):
 
     @router.message(Registration.last_name)
     async def reg_last_name(message: Message, state: FSMContext):
-        ''' NEED TO ADD DESCRIPTION ''' 
+        ''' NEED TO ADD DESCRIPTION '''
         await state.update_data(last_name=message.text)
         await state.set_state(Registration.tennis_experience)
         data = await state.get_data()
-        message_out = title.load_title(message.chat.id, 'reg_tennis_experience', 
+        message_out = title.load_title(message.chat.id, 'reg_tennis_experience',
                                        str(f"{data['first_name']} {message.text}"))
         await message.answer(message_out)
 
     @router.message(Registration.tennis_experience)
     async def reg_ntrp_quest(message: Message, state: FSMContext):
-        ''' NEED TO ADD DESCRIPTION '''    
+        ''' NEED TO ADD DESCRIPTION '''
         await state.update_data(tennis_experience=message.text)
-        message_out = title.load_title(message.chat.id, 'reg_ntrp_quest', message.text)
+        message_out = title.load_title(
+            message.chat.id, 'reg_ntrp_quest', message.text)
         await message.answer(message_out,  reply_markup=await markup_registration.inline_ntrp_quest(message.chat.id))
 
     @router.callback_query(lambda c: re.match(r'reg_ntrp', c.data))
@@ -133,12 +134,12 @@ def run(router):
                 callback.message.chat.id, 'reg_ntrp_yes')
             await callback.message.edit_text(message_out, reply_markup=None)
             await state.set_state(Registration.ntrp)
-        
-        # No hardcode more PLS    
+
+        # No hardcode more PLS
         elif action == 'ntrpno':
             message_out = title.load_title(
                 callback.message.chat.id, 'reg_ntrp_no')
-            await callback.message.edit_text(message_out, 
+            await callback.message.edit_text(message_out,
                                              reply_markup=await markup_registration.inline_ntrp_accept(callback.message.chat.id))
 
     @router.message(Registration.ntrp)
