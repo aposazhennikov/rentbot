@@ -3,6 +3,7 @@ import pathlib
 
 
 def run():
+    ''' NEED TO ADD DESCRIPTION '''
     # path log settings
     dir = pathlib.Path(__file__).parent.resolve()
 
