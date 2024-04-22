@@ -28,7 +28,8 @@ class User:
         with self.conn:
             for key in args:
                 try:
-                    self.cursor.execute(f"SELECT {key} FROM api.users WHERE id = %s", (chat_id,))
+                    self.cursor.execute(
+                        f"SELECT {key} FROM api.users WHERE id = %s", (chat_id,))
                     result = self.cursor.fetchall()
                     for row in result:
                         data[key] = str(row[0])
@@ -70,7 +71,7 @@ class User:
             return None
 
     def create(self, params):
-         '''
+        '''
         Need to add description of function
         '''
         print('add user')

@@ -27,7 +27,7 @@ TITLE_CHOICE = "Выбери язык (Choose a language):"
 
 
 def run(router):
-    ''' NEED TO ADD DESCRIPTION '''
+    ''' temp handlers for change language if user changed the decision '''
     @router.message(Command('help'))
     async def command_help_handler(message: Message) -> None:
         ''' NEED TO ADD DESCRIPTION '''
