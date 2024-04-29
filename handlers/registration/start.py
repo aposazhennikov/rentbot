@@ -5,6 +5,7 @@ from fsm.registration import Registration
 from aiogram.fsm.context import FSMContext
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, CallbackQuery
+from aiogram.types.bot_command import BotCommand
 import re
 import time
 
@@ -26,7 +27,7 @@ from titles import title
 TITLE_CHOICE = "Выбери язык (Choose a language):"
 
 
-def run(router):
+def run(router, dp):
     ''' temp handlers for change language if user changed the decision '''
     @router.message(Command('help'))
     async def command_help_handler(message: Message) -> None:
@@ -48,13 +49,19 @@ def run(router):
             user_manager = User()
             get_user = user_manager.get_user_args(chat_id, 'first_name')
 
-            if get_user and BOT_MODE != 'dev':
+            if get_user:
+                command = BotCommand(
+                    command="/profile", description="Profile command")
+                # Обрабатываем команду
+                await dp.process_commands(command)
+                '''
                 message_out = title.load_title(
                     chat_id, 'start_greetings', get_user['first_name'])
                 if message:
                     await message.answer(message_out)
                 elif callback:
                     await callback.message.edit_text(message_out)
+                '''
             else:
                 if get_user:
                     message_dev = f"DEV MODE. Hey {get_user['first_name']} 😉 you didnt see this, okay ?"

@@ -4,10 +4,9 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from config import *
-from handlers.registration import router_start
-from handlers.profile import router_profile
+from handlers.profile.profile_main import router_profile
+from handlers.profile.profile_callback import router_profile_callback
 from logs import rent_logger
-
 # file and console loger $path:/logs/errors.log
 # this makes the bot slower
 if BOT_MODE == 'dev':
@@ -20,8 +19,12 @@ async def main() -> None:
     bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(
         parse_mode=ParseMode.HTML))
     # Connect router from handlers
-    dp.include_router(router_start)
+
+    # ===== PROFILE BLOCK ========
+    # Profile main router with buttons edit delete
     dp.include_router(router_profile)
+    # Profile_callback
+    dp.include_router(router_profile_callback)
     # And the run events dispatching
     await dp.start_polling(bot)
 

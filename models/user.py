@@ -12,6 +12,7 @@ class User:
                                          user=DB_USER,
                                          password=DB_PASSWORD)
             self.cursor = self.conn.cursor()
+            self.scheme = DB_USER_SCHEME
         except psycopg2.Error as e:
             # Need to add meaningful exception
             return None
@@ -29,7 +30,7 @@ class User:
             for key in args:
                 try:
                     self.cursor.execute(
-                        f"SELECT {key} FROM api.users WHERE id = %s", (chat_id,))
+                        f"SELECT {key} FROM {self.scheme}.users WHERE id = %s", (chat_id,))
                     result = self.cursor.fetchall()
                     for row in result:
                         data[key] = str(row[0])
@@ -48,7 +49,9 @@ class User:
             with self.conn as conn:
                 with self.cursor as cur:
                     cur.execute(
-                        "SELECT * FROM api.users WHERE id=%s", (chat_id,))
+                        f"""SELECT id, birth_day, ntrp, first_name, last_name, 
+                        tennis_experience, phone_number, user_name, description, 
+                        created_at FROM {self.scheme}.users WHERE id=%s""", (chat_id,))
                     result = cur.fetchone()
 
             if result and len(result) == 10:

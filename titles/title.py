@@ -5,16 +5,15 @@ This function is making multi languages titles and store data for each users in 
 import json
 import pathlib
 from config import *
-import re
-
 
 # we should make class and __init__ here chat_id, I will do it later
+
 
 def load_json():
     '''
     Function return loaded file with different locales
     This locales contains phrases on different languages, for example:
-    
+
     EN start_greetings_first: Hi, Im bot <b>Rafa</b>! Lets make your profile.
     RU start_greetings_first: Привет. Меня зовут бот Рафа и я буду твоим проводником и помощником по теннисным тренировкам на корте в Овсянниковском саду.
     '''
@@ -24,12 +23,12 @@ def load_json():
     return translations
 
 
-def load_title(chat_id, title_name, var=None):
+def load_title(chat_id, title_name, *args):
     '''
     Function takes as input CHAT_ID - this shows us user and TITLE_NAME from loaded JSON,
     and VAR - this is value, which we can change in TEXT 
     Function RETURN text from TITLE_NAME, for example:
-    
+
      TITLE_NAME:"reg_tennis_experience": {
             TEXT: "Super, <b>%var%</b>, nice to meet you!"}
 
@@ -40,9 +39,12 @@ def load_title(chat_id, title_name, var=None):
 
     if language in translations and title_name in translations[language]:
         text_out = translations[language][title_name].get('text')
-    # Changing %var% in our string to value, which we get from "var"
-        if var:
-            text_out = re.sub('%var%', var, text_out)
+        # Changing %var% in our string to value, which we get from "var"
+        for arg in args:
+            text_out = text_out.replace('%var%', arg, 1)
+
+        '''if var:
+            text_out = re.sub('%var%', var, text_out)'''
         return text_out
     else:
         return "Unknown language, or title_name"

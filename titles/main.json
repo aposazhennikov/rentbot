@@ -42,8 +42,11 @@
         "reg_finish": {
             "text": "Registration is done!\n\nHere is your card:"
         },
-        "profile_main_menu": {
-            "text": "Profile of user <b>%var%</b>"
+        "profile_main_menu_with_username": {
+            "text": "Your profile in the bot:\n\n%var% %var%\nBirthday: %var%\nNTRP: %var%\nTennis experience: %var%\nUser name in telegram: %var%\nPhone: %var%\nOptional: %var%"
+        },
+        "profile_main_menu_without_username": {
+            "text": "Your profile in the bot:\n\n%var% %var%\nBirthday: %var%\nNTRP: %var%\nTennis experience: %var%\nPhone: %var%\nOptional: %var%"
         },
         "profile_btn_edit": {
             "text": "Edit"
@@ -95,8 +98,11 @@
         "reg_finish": {
             "text": "Отличная работа, регистрация завершена!\n\nВот твоя карточка:"
         },
-        "profile_main_menu": {
-            "text": "Профиль пользователя <b>%var%</b>"
+        "profile_main_menu_with_username": {
+            "text": "Твой профиль в боте:\n\n%var% %var%\nДень рождения: %var%\nNTRP: %var%\nОпыт игры в теннис: %var%\nUser name в telegram: %var%\nТелефон: %var%\nДополнительно: %var%"
+        },
+        "profile_main_menu_without_username": {
+            "text": "Твой профиль в боте:\n\n%var% %var%\nДень рождения: %var%\nNTRP: %var%\nОпыт игры в теннис: %var%\nUser name в telegram: %var%\nТелефон: %var%\nДополнительно: %var%"
         },
         "profile_btn_edit": {
             "text": "Редактировать"
