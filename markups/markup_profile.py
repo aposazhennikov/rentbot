@@ -14,8 +14,8 @@ async def main_menu(chat_id):
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text=title_edit_profile,
-                              callback_data=f'profile_edit_{chat_id}'),
-            InlineKeyboardButton(text=title_delete_profile, callback_data=f'profile_delete_{chat_id}')],
+                              callback_data=f'profile_edit'),
+            InlineKeyboardButton(text=title_delete_profile, callback_data=f'profile_delete')],
     ])
 
     return keyboard

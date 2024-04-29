@@ -15,17 +15,20 @@ router_profile_callback = Router()
 @router_profile_callback.callback_query(lambda c: re.match(r'profile_', c.data))
 async def handle_profile_callback(callback: CallbackQuery):
     split = callback.data.split('_')
-    prefix, action, arg = split
+    prefix, action = split
     await callback.answer(action)
-    profile_callback_main(router_profile_callback, callback, action, arg)
+    body = profile_callback_main(action, callback.message.chat.id)
+    await callback.message.edit_text(text=body, reply_markup=None)
 
 
-def profile_callback_main(router, callback, action, arg):
-    print(f"{action} : {arg}")
+def profile_callback_main(action, chat_id):
+    print(f"{action} : {chat_id}")
 
     if action == 'edit':
+        return f"{action} : {chat_id}"
         # code edit profile
         pass
     elif action == 'delete':
+        return f"{action} : {chat_id}"
         # code delete profile
         pass
