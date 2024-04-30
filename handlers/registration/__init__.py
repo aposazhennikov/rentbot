@@ -5,10 +5,16 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message
 from aiogram import Router
 
+# temp
+from titles import title
+
 router_registration = Router()
 
 
 @router_registration.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
     ''' NEED TO ADD DESCRIPTION '''
-    await message.answer(text="here is a Alex's registration code")
+    await message.answer(text="here is registration")
+
+    # temp code main menu
+    await message.answer(text=await title.load_title(message.chat.id, 'start_temp_menu'))
