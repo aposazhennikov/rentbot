@@ -45,3 +45,19 @@ async def edit_menu(chat_id):
     keyboard_builder.adjust(2).as_markup()
 
     return keyboard_builder.adjust(2).as_markup()
+
+
+async def delete_menu(chat_id):
+    title_delete_yes = await title.load_title(chat_id, 'profile_btn_delete_yes')
+    title_delete_no = await title.load_title(chat_id, 'profile_btn_delete_no')
+    title_main_menu = await title.load_title(chat_id, 'title_main_menu')
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text=title_delete_yes,
+                              callback_data=f'profile-delete-confirm'),
+            InlineKeyboardButton(text=title_delete_no, callback_data=f'profile-main')],
+        [InlineKeyboardButton(text=title_main_menu,
+                              callback_data=f'main-menu')],
+    ])
+
+    return keyboard

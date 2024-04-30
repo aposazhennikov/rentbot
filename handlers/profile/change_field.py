@@ -11,7 +11,7 @@ from aiogram.fsm.context import FSMContext
 from fsm.edit_profile import EditProfile
 from titles import title
 from aiogram import Router
-
+from handlers.profile import profile_main
 router_profile_change_field = Router()
 
 
@@ -58,6 +58,7 @@ async def reg_first_name(message: Message, state: FSMContext):
         params = {field_name: str(string)}
         await user_manager.update(params)
         await message.answer(message_out)
+        await profile_main.command_profile_handler(message)
         await state.clear()
     else:
         message_out = await title.load_title(message.chat.id, f'profile_error_{field_name}', string)
@@ -78,6 +79,7 @@ async def reg_first_name(message: Message, state: FSMContext):
         params = {field_name: str(string)}
         await user_manager.update(params)
         await message.answer(message_out)
+        await profile_main.command_profile_handler(message)
         await state.clear()
     else:
         message_out = await title.load_title(message.chat.id, f'profile_error_{field_name}', string)
