@@ -11,8 +11,8 @@ router_profile = Router()
 
 @router_profile.message(Command('profile'))
 async def command_profile_handler(message: Message) -> None:
-    user_manager = User()
-    user_load = await user_manager.get_by_id(message.chat.id)
+    user_manager = User(message.chat.id)
+    user_load = await user_manager.get()
 
     if (user_load):
         message_out = await get_profile_info(message.chat.id, user_load)

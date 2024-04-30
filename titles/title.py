@@ -6,9 +6,8 @@ import json
 import pathlib
 from config import *
 
+
 # we should make class and __init__ here chat_id, I will do it later
-
-
 async def load_json():
     '''
     Function return loaded file with different locales
@@ -43,8 +42,6 @@ async def load_title(chat_id, title_name, *args):
         for arg in args:
             text_out = text_out.replace('%var%', arg, 1)
 
-        '''if var:
-            text_out = re.sub('%var%', var, text_out)'''
         return text_out
     else:
         return f"Unknown {title_name}"
@@ -80,3 +77,22 @@ async def get_user_language(chat_id):
     language = data.get(str(chat_id))
 
     return language
+
+
+# filter symbols float string any
+async def filter_symbols(string, max_len=255, type='any'):
+    if (type == 'float'):
+        string = string.replace(',', '.')
+        set_chars = set(
+            '0123456789.,')
+    elif (type == 'string'):
+        set_chars = set(
+            'ЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮёйцукенгшщзхъфывапролджэячсмитьбюabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_- ')
+    else:
+        set_chars = set(
+            'ЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮёйцукенгшщзхъфывапролджэячсмитьбюabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%!,.()_- ')
+
+    if len(string) > int(max_len):
+        string = string[:max_len]
+
+    return str(''.join(symbol for symbol in string if symbol in set_chars))

@@ -26,7 +26,7 @@ async def main_menu(chat_id):
 
 async def edit_menu(chat_id):
     keyboard_builder = InlineKeyboardBuilder()
-    user_manager = User()
+    user_manager = User(None)
 
     # structure = ['firstname', 'lastname', ... etc]
     structure = await user_manager.get_structure_profile_edit()

@@ -84,11 +84,68 @@
         "profile_btn_edit_description": {
             "text": "Add. Info"
         },
-        "btn_back": {
-            "text": "Back"
+        "profile_new_first_name": {
+            "text": "Name successfully changed to \"%var%\""
+        },
+        "profile_new_last_name": {
+            "text": "Last name successfully changed to \"%var%\""
+        },
+        "profile_new_user_name": {
+            "text": "Username successfully changed to \"%var%\""
+        },
+        "profile_new_phone_number": {
+            "text": "User phone number successfully changed to \"%var%\""
+        },
+        "profile_new_birth_day": {
+            "text": "User's date of birth was successfully changed to \"%var%\""
+        },
+        "profile_new_ntrp": {
+            "text": "User NTRP level successfully changed to \"%var%\""
+        },
+        "profile_new_tennis_experience": {
+            "text": "User's tennis experience successfully changed to \"%var%\""
+        },
+        "profile_new_description": {
+            "text": "Additional user information successfully changed to \"%var%\""
+        },
+        "profile_error_first_name": {
+            "text": "The first name must consist of Cyrillic or Latin characters, at least 2 characters, please correct. You entred \"%var%\""
+        },
+        "profile_error_last_name": {
+            "text": "The last name must consist of Cyrillic or Latin characters, at least 2 characters, please correct. You entred \"%var%\""
+        },
+        "profile_change_field": {
+            "text": "Recorded %var%: <b>%var%</b>. What do you want to change it to?"
         },
         "title_main_menu": {
             "text": "🏡Main menu🏡"
+        },
+        "title_field_first_name": {
+            "text": "first name"
+        },
+        "title_field_last_name": {
+            "text": "last name"
+        },
+        "title_field_user_name": {
+            "text": "user name"
+        },
+        "title_field_phone_number": {
+            "text": "phone number"
+        },
+        "title_field_birth_day": {
+            "text": "birth day"
+        },
+        "title_field_ntrp": {
+            "text": "ntrp"
+        },
+        "title_field_tennis_experience": {
+            "text": "tennis experience"
+        },
+        "title_field_description": {
+            "text": "description"
+        },
+        "btn_back": {
+            "text": "Back"
         }
     },
     "ru": {
@@ -150,7 +207,7 @@
             "text": "Удалить"
         },
         "profile_title_edit": {
-            "text": "Редактирование анкеты. Что именно хотите отредактировать в анкете?"
+            "text": "Редактирование анкеты. Что именно хочешь отредактировать в анкете?"
         },
         "profile_btn_edit_first_name": {
             "text": "Имя"
@@ -176,11 +233,68 @@
         "profile_btn_edit_description": {
             "text": "Доп. информация"
         },
-        "btn_back": {
-            "text": "Назад"
+        "profile_new_first_name": {
+            "text": "Имя успешно изменено на \"%var%\""
+        },
+        "profile_new_last_name": {
+            "text": "Фамилия успешно изменена на \"%var%\""
+        },
+        "profile_new_user_name": {
+            "text": "Имя пользователя успешно изменено на \"%var%\""
+        },
+        "profile_new_phone_number": {
+            "text": "Телефон пользователя успешно изменен на \"%var%\""
+        },
+        "profile_new_birth_day": {
+            "text": "Дата рождения пользователя успешно изменена на \"%var%\""
+        },
+        "profile_new_ntrp": {
+            "text": "NTRP уровень пользователя успешно изменен на \"%var%\""
+        },
+        "profile_new_tennis_experience": {
+            "text": "Опыт игры в теннис  пользователя успешно изменен на \"%var%\""
+        },
+        "profile_new_description": {
+            "text": "Доп. информация пользователя успешно изменена на \"%var%\""
+        },
+        "profile_error_first_name": {
+            "text": "Имя должно состоять из символов кириллицы или латиницы, не менее 2 символов, скорректируй пожалуйста. Ты ввёл \"%var%\""
+        },
+        "profile_error_last_name": {
+            "text": "Фамилия должна состоять из символов кириллицы или латиницы, не менее 2 символов, скорректируй пожалуйста. Ты ввёл \"%var%\""
+        },
+        "profile_change_field": {
+            "text": "Записано %var%: <b>%var%</b>. На что хотите поменять?"
         },
         "title_main_menu": {
             "text": "🏡Главное меню🏡"
+        },
+        "title_field_first_name": {
+            "text": "имя"
+        },
+        "title_field_last_name": {
+            "text": "фамилия"
+        },
+        "title_field_user_name": {
+            "text": "имя пользователя"
+        },
+        "title_field_phone_number": {
+            "text": "номер телефона"
+        },
+        "title_field_birth_day": {
+            "text": "день рождения"
+        },
+        "title_field_ntrp": {
+            "text": "ntrp"
+        },
+        "title_field_tennis_experience": {
+            "text": "опыт игры в теннис"
+        },
+        "title_field_description": {
+            "text": "доп. информация"
+        },
+        "btn_back": {
+            "text": "Назад"
         }
     }
 }

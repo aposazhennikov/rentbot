@@ -8,6 +8,7 @@ from handlers.registration import router_registration
 from handlers.help import router_help
 from handlers.profile.profile_main import router_profile
 from handlers.profile.profile_callback import router_profile_callback
+from handlers.profile.change_field import router_profile_change_field
 from handlers.callback import router_main_callback
 from logs import rent_logger
 # file and console loger $path:/logs/errors.log
@@ -23,14 +24,16 @@ async def main() -> None:
         parse_mode=ParseMode.HTML))
     # Connect router from handlers
 
-    # ===== REGISTARTION/START BLOCK =====
+    # ===== REGISTRATION/START BLOCK =====
     dp.include_router(router_registration)
 
     # ===== PROFILE BLOCK =====
     # main router with buttons edit delete
     dp.include_router(router_profile)
-    # callbacks
+    # callbacks for profile
     dp.include_router(router_profile_callback)
+    # FSM for profile edit
+    router_profile_callback.include_router(router_profile_change_field)
 
     # ===== HELP BLOCK =====
     # change language + callback there
