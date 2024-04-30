@@ -9,7 +9,7 @@ from config import *
 # we should make class and __init__ here chat_id, I will do it later
 
 
-def load_json():
+async def load_json():
     '''
     Function return loaded file with different locales
     This locales contains phrases on different languages, for example:
@@ -23,7 +23,7 @@ def load_json():
     return translations
 
 
-def load_title(chat_id, title_name, *args):
+async def load_title(chat_id, title_name, *args):
     '''
     Function takes as input CHAT_ID - this shows us user and TITLE_NAME from loaded JSON,
     and VAR - this is value, which we can change in TEXT 
@@ -34,8 +34,8 @@ def load_title(chat_id, title_name, *args):
 
     '''
     # language is loading from config, but we should make in db or temp file for each users
-    language = get_user_language(chat_id)
-    translations = load_json()
+    language = await get_user_language(chat_id)
+    translations = await load_json()
 
     if language in translations and title_name in translations[language]:
         text_out = translations[language][title_name].get('text')
@@ -47,10 +47,10 @@ def load_title(chat_id, title_name, *args):
             text_out = re.sub('%var%', var, text_out)'''
         return text_out
     else:
-        return "Unknown language, or title_name"
+        return f"Unknown {title_name}"
 
 
-def save_user_language(chat_id, lang):
+async def save_user_language(chat_id, lang):
     dir = pathlib.Path(__file__).parent.resolve()
     if not dir.exists():
         dir.mkdir(parents=True, exist_ok=True)
@@ -67,7 +67,7 @@ def save_user_language(chat_id, lang):
         json.dump(data, file, indent=4)
 
 
-def get_user_language(chat_id):
+async def get_user_language(chat_id):
     dir = pathlib.Path(__file__).parent.resolve()
     file_path = f"{dir}/user_languages.json"
 

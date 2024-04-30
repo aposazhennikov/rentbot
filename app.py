@@ -4,8 +4,11 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from config import *
+from handlers.registration import router_registration
+from handlers.help import router_help
 from handlers.profile.profile_main import router_profile
 from handlers.profile.profile_callback import router_profile_callback
+from handlers.callback import router_main_callback
 from logs import rent_logger
 # file and console loger $path:/logs/errors.log
 # this makes the bot slower
@@ -20,11 +23,22 @@ async def main() -> None:
         parse_mode=ParseMode.HTML))
     # Connect router from handlers
 
-    # ===== PROFILE BLOCK ========
-    # Profile main router with buttons edit delete
+    # ===== REGISTARTION/START BLOCK =====
+    dp.include_router(router_registration)
+
+    # ===== PROFILE BLOCK =====
+    # main router with buttons edit delete
     dp.include_router(router_profile)
-    # Profile_callback
+    # callbacks
     dp.include_router(router_profile_callback)
+
+    # ===== HELP BLOCK =====
+    # change language + callback there
+    dp.include_router(router_help)
+
+    # ===== MAIN MENU BLOCK =====
+    dp.include_router(router_main_callback)
+
     # And the run events dispatching
     await dp.start_polling(bot)
 

@@ -19,7 +19,7 @@ class User:
 
     # Получаем любой(ые) элемент(ы) из таблицы users
     # IMPORT FROM OLD CODE AND MODIFED
-    def get_user_args(self, chat_id, *args):
+    async def get_user_args(self, chat_id, *args):
         '''
         Need to add description of function
         And change HARDCODE "api.users" and "chat_id" to values which getting from input FUNC
@@ -38,7 +38,7 @@ class User:
                     return None
             return data
 
-    def get_by_id(self, chat_id):
+    async def get_by_id(self, chat_id):
         '''
         Need to add description of function
         Again no HARDCODE PLS
@@ -72,6 +72,19 @@ class User:
                 return None
         except psycopg2.Error as e:
             return None
+
+    async def get_structure_profile_edit(self):
+        args = [
+            "first_name",
+            "last_name",
+            "user_name",
+            "phone_number",
+            "birth_day",
+            "ntrp",
+            "tennis_experience",
+            "description"
+        ]
+        return args
 
     def create(self, params):
         '''

@@ -1,5 +1,8 @@
 {
     "en": {
+        "start_temp_menu": {
+            "text": "Hello, here is commands:\n\n/start - restart\n/profile - your profile\n/help - settings"
+        },
         "start_greetings_first": {
             "text": "Hi, Im bot <b>Rafa</b>! Lets make your profile."
         },
@@ -53,9 +56,45 @@
         },
         "profile_btn_delete": {
             "text": "Delete"
+        },
+        "profile_title_edit": {
+            "text": "Editing a profile. What exactly do you want to edit in the questionnaire?"
+        },
+        "profile_btn_edit_first_name": {
+            "text": "First name"
+        },
+        "profile_btn_edit_last_name": {
+            "text": "Last name"
+        },
+        "profile_btn_edit_user_name": {
+            "text": "User name telegram"
+        },
+        "profile_btn_edit_birth_day": {
+            "text": "Birth day"
+        },
+        "profile_btn_edit_ntrp": {
+            "text": "NTRP level"
+        },
+        "profile_btn_edit_phone_number": {
+            "text": "Phone"
+        },
+        "profile_btn_edit_tennis_experience": {
+            "text": "Tennis experience"
+        },
+        "profile_btn_edit_description": {
+            "text": "Add. Info"
+        },
+        "btn_back": {
+            "text": "Back"
+        },
+        "title_main_menu": {
+            "text": "🏡Main menu🏡"
         }
     },
     "ru": {
+        "start_temp_menu": {
+            "text": "Привет, меню:\n\n/start - перезапуск\n/profile - твой профиль\n/help - настройки"
+        },
         "start_greetings_first": {
             "text": "Привет. Меня зовут бот Рафа и я буду твоим проводником и помощником по теннисным тренировкам на корте в Овсянниковском саду. Только сначала давай ты расскажешь немного о себе, а потом я покажу тебе как записаться на корт и другие возможности."
         },
@@ -109,6 +148,39 @@
         },
         "profile_btn_delete": {
             "text": "Удалить"
+        },
+        "profile_title_edit": {
+            "text": "Редактирование анкеты. Что именно хотите отредактировать в анкете?"
+        },
+        "profile_btn_edit_first_name": {
+            "text": "Имя"
+        },
+        "profile_btn_edit_last_name": {
+            "text": "Фамилия"
+        },
+        "profile_btn_edit_user_name": {
+            "text": "Имя пользователя telegram"
+        },
+        "profile_btn_edit_birth_day": {
+            "text": "День рождения"
+        },
+        "profile_btn_edit_phone_number": {
+            "text": "Телефон"
+        },
+        "profile_btn_edit_ntrp": {
+            "text": "Уровень NTRP"
+        },
+        "profile_btn_edit_tennis_experience": {
+            "text": "Опыт игры в теннис"
+        },
+        "profile_btn_edit_description": {
+            "text": "Доп. информация"
+        },
+        "btn_back": {
+            "text": "Назад"
+        },
+        "title_main_menu": {
+            "text": "🏡Главное меню🏡"
         }
     }
 }
