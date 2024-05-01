@@ -4,6 +4,7 @@ This function is making multi languages titles and store data for each users in 
 
 import json
 import pathlib
+import re
 from config import *
 
 
@@ -80,19 +81,25 @@ async def get_user_language(chat_id):
 
 
 # filter symbols float string any
-async def filter_symbols(string, max_len=255, type='any'):
+async def filter_symbols(string, max_len=255, type='any', reg=None):
+    if reg is not None:
+        pattern = re.compile(reg)
+        if not re.match(pattern, string):
+            return False
+
     if (type == 'float'):
         string = string.replace(',', '.')
-        set_chars = set(
-            '0123456789.,')
+        set_chars = set('0123456789.,')
     elif (type == 'string'):
         set_chars = set(
             'ЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮёйцукенгшщзхъфывапролджэячсмитьбюabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_- ')
     else:
         set_chars = set(
-            'ЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮёйцукенгшщзхъфывапролджэячсмитьбюabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%!,.()_- ')
+            'ЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮёйцукенгшщзхъфывапролджэячсмитьбюabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%!,.(),._- ')
 
     if len(string) > int(max_len):
         string = string[:max_len]
 
-    return str(''.join(symbol for symbol in string if symbol in set_chars))
+    string = str(
+        ''.join(symbol if symbol in set_chars else '' for symbol in string))
+    return string

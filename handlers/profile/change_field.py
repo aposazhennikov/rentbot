@@ -1,17 +1,15 @@
 # Функция для изменения имени, выставляем наш FSM в first_name, приглашаем написать имя.
 from titles import title
-from markups import markup_registration, markup_lang
 from models.user import User
 from config import *
-import time
-import re
 from aiogram.types import Message, CallbackQuery
-from aiogram.filters import CommandStart, Command
 from aiogram.fsm.context import FSMContext
 from fsm.edit_profile import EditProfile
 from titles import title
 from aiogram import Router
 from handlers.profile import profile_main
+from markups import markup_profile
+
 router_profile_change_field = Router()
 
 
@@ -22,7 +20,6 @@ async def send_greetings_and_prompt_name(chat_id: int, field: str, callback: Cal
 
     message_out = await title.load_title(chat_id, 'profile_change_field', await title.load_title(
         chat_id, f'title_field_{field}'), old_value)
-    await callback.message.edit_text(message_out)
 
     # await state.set_state(EditProfile.field) #it doesnt work, i didnt find solution
 
@@ -37,12 +34,14 @@ async def send_greetings_and_prompt_name(chat_id: int, field: str, callback: Cal
     elif (field == 'description'):
         await state.set_state(EditProfile.description)
     elif (field == 'phone_number'):
+        # share_contact here
         await state.set_state(EditProfile.phone_number)
     elif (field == 'birth_day'):
         await state.set_state(EditProfile.birth_day)
-    # we should add this to the state machine
     elif (field == 'gender'):
         await state.set_state(EditProfile.gender)
+
+    await callback.message.edit_text(message_out)
 
 
 @router_profile_change_field.message(EditProfile.first_name)
@@ -50,7 +49,7 @@ async def reg_first_name(message: Message, state: FSMContext):
     string = await title.filter_symbols(message.text, 255, 'string')
     field_name = 'first_name'
 
-    if len(string) > 2:
+    if string is not False and len(string) > 2:
         await state.update_data(first_name=string)
         # data = await state.get_data()
         message_out = await title.load_title(message.chat.id, f'profile_new_{field_name}', string)
@@ -71,7 +70,7 @@ async def reg_first_name(message: Message, state: FSMContext):
     string = await title.filter_symbols(message.text, 255, 'string')
     field_name = 'last_name'
 
-    if len(string) > 2:
+    if string is not False and len(string) > 2:
         await state.update_data(last_name=string)
         # data = await state.get_data()
         message_out = await title.load_title(message.chat.id, f'profile_new_{field_name}', string)
@@ -86,55 +85,114 @@ async def reg_first_name(message: Message, state: FSMContext):
         await message.answer(message_out)
         await state.set_state(EditProfile.last_name)
 
-'''
-@router_profile_change_field.message(Registration.last_name)
-async def reg_last_name(message: Message, state: FSMContext):
-    await state.update_data(last_name=message.text)
-    await state.set_state(Registration.tennis_experience)
-    data = await state.get_data()
-    message_out = title.load_title(message.chat.id, 'reg_tennis_experience',
-                                   str(f"{data['first_name']} {message.text}"))
-    await message.answer(message_out)
+
+@router_profile_change_field.message(EditProfile.ntrp)
+async def reg_first_name(message: Message, state: FSMContext):
+    # regular expression
+    reg = '^([1-6]|[1-6][\.,][\d?]+|7)$'
+    string = await title.filter_symbols(message.text, 3, 'float', reg)
+    field_name = 'ntrp'
+
+    if string is not False and len(string) > 0:
+        await state.update_data(ntrp=string)
+        # data = await state.get_data()
+        message_out = await title.load_title(message.chat.id, f'profile_new_{field_name}', string)
+        user_manager = User(message.chat.id)
+        params = {field_name: str(string)}
+        await user_manager.update(params)
+        await message.answer(message_out)
+        await profile_main.command_profile_handler(message)
+        await state.clear()
+    else:
+        message_out = await title.load_title(message.chat.id, f'profile_error_{field_name}', message.text)
+        await message.answer(message_out)
+        await state.set_state(EditProfile.ntrp)
 
 
-@router_profile_change_field.message(Registration.tennis_experience)
-async def reg_ntrp_quest(message: Message, state: FSMContext):
-    await state.update_data(tennis_experience=message.text)
-    message_out = title.load_title(
-        message.chat.id, 'reg_ntrp_quest', message.text)
-    await message.answer(message_out,  reply_markup=await markup_registration.inline_ntrp_quest(message.chat.id))
+@router_profile_change_field.message(EditProfile.birth_day)
+async def reg_first_name(message: Message, state: FSMContext):
+    # regular expression
+    # reg = '(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[012])\.(19|20)\d\d'
+    reg = '(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)\d\d'
+    string = await title.filter_symbols(str(message.text), 10, 'any', reg)
+    field_name = 'birth_day'
+
+    if string is not False and len(string) > 0:
+        await state.update_data(birth_day=string)
+        # data = await state.get_data()
+        message_out = await title.load_title(message.chat.id, f'profile_new_{field_name}', string)
+        user_manager = User(message.chat.id)
+        params = {field_name: str(string)}
+        await user_manager.update(params)
+        await message.answer(message_out)
+        await profile_main.command_profile_handler(message)
+        await state.clear()
+    else:
+        message_out = await title.load_title(message.chat.id, f'profile_error_{field_name}', message.text)
+        await message.answer(message_out)
+        await state.set_state(EditProfile.birth_day)
 
 
-@router_profile_change_field.callback_query(lambda c: re.match(r'reg_ntrp', c.data))
-async def reg_ntrp(callback: CallbackQuery, state: FSMContext):
-    split = callback.data.split('_')
-    prefix, action = split
-    await callback.answer(action)
+@router_profile_change_field.message(EditProfile.tennis_experience)
+async def reg_first_name(message: Message, state: FSMContext):
+    string = await title.filter_symbols(str(message.text), 255, 'any')
+    field_name = 'tennis_experience'
 
-    # No hardcode more PLS
-    if action == 'ntrpyes':
-        message_out = title.load_title(
-            callback.message.chat.id, 'reg_ntrp_yes')
-        await callback.message.edit_text(message_out, reply_markup=None)
-        await state.set_state(Registration.ntrp)
+    if string is not False and len(string) > 2:
+        await state.update_data(tennis_experience=string)
+        # data = await state.get_data()
+        message_out = await title.load_title(message.chat.id, f'profile_new_{field_name}', string)
+        user_manager = User(message.chat.id)
+        params = {field_name: str(string)}
+        await user_manager.update(params)
+        await message.answer(message_out)
+        await profile_main.command_profile_handler(message)
+        await state.clear()
+    else:
+        message_out = await title.load_title(message.chat.id, f'profile_error_{field_name}', message.text)
+        await message.answer(message_out)
+        await state.set_state(EditProfile.tennis_experience)
 
-    # No hardcode more PLS
-    elif action == 'ntrpno':
-        message_out = title.load_title(
-            callback.message.chat.id, 'reg_ntrp_no')
-        await callback.message.edit_text(message_out,
-                                         reply_markup=await markup_registration.inline_ntrp_accept(callback.message.chat.id))
+
+@router_profile_change_field.message(EditProfile.description)
+async def reg_first_name(message: Message, state: FSMContext):
+    string = await title.filter_symbols(str(message.text), 255, 'any')
+    field_name = 'description'
+
+    if string is not False and len(string) > 2:
+        await state.update_data(description=string)
+        # data = await state.get_data()
+        message_out = await title.load_title(message.chat.id, f'profile_new_{field_name}', string)
+        user_manager = User(message.chat.id)
+        params = {field_name: str(string)}
+        await user_manager.update(params)
+        await message.answer(message_out)
+        await profile_main.command_profile_handler(message)
+        await state.clear()
+    else:
+        message_out = await title.load_title(message.chat.id, f'profile_error_{field_name}', message.text)
+        await message.answer(message_out)
+        await state.set_state(EditProfile.description)
 
 
-@router_profile_change_field.message(Registration.ntrp)
-async def reg_finish(message: Message, state: FSMContext):
-    await state.update_data(ntrp=message.text)
-    data = await state.get_data()
-    message_out = f"{title.load_title(message.chat.id, 'reg_finish')}\n"
+@router_profile_change_field.message(EditProfile.phone_number)
+async def reg_first_name(message: Message, state: FSMContext):
+    # regular expression
+    reg = '^(\+)?((\d{2,3}) ?\d|\d)(([ -]?\d)|( ?(\d{2,3}) ?)){5,12}\d$'
+    string = await title.filter_symbols(str(message.text), 12, 'any', reg)
+    field_name = 'phone_number'
 
-    message_out += "\n".join(f"<b>{key}</b> = {value}" for key,
-                             value in data.items())
-
-    await message.answer(message_out)
-    await state.clear()
-'''
+    if string is not False and len(string) > 0:
+        await state.update_data(phone_number=string)
+        # data = await state.get_data()
+        message_out = await title.load_title(message.chat.id, f'profile_new_{field_name}', string)
+        user_manager = User(message.chat.id)
+        params = {field_name: str(string)}
+        await user_manager.update(params)
+        await message.answer(message_out)
+        await profile_main.command_profile_handler(message)
+        await state.clear()
+    else:
+        message_out = await title.load_title(message.chat.id, f'profile_error_{field_name}', message.text)
+        await message.answer(message_out)
+        await state.set_state(EditProfile.phone_number)

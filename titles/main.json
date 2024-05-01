@@ -87,6 +87,9 @@
         "profile_btn_edit_description": {
             "text": "Add. Info"
         },
+        "profile_btn_edit_gender": {
+            "text": "Gender"
+        },
         "profile_btn_delete_yes": {
             "text": "Yes"
         },
@@ -123,8 +126,23 @@
         "profile_error_last_name": {
             "text": "The last name must consist of Cyrillic or Latin characters, at least 2 characters, please correct. You entred \"%var%\""
         },
+        "profile_error_ntrp": {
+            "text": "You entered your NTRP level incorrectly, usually this is a number from 1 to 7, non-integer values like 2.5 are possible. You entered \"%var%\"\n\n Please enter in the correct format.⬇️"
+        },
+        "profile_error_birth_day": {
+            "text": "Indicate your date of birth in this format: DD.MM.YYYY"
+        },
+        "profile_error_tennis_experience": {
+            "text": "Write more than two characters"
+        },
+        "profile_error_description": {
+            "text": "Write more than two characters"
+        },
+        "profile_error_phone_number": {
+            "text": "The phone number is incorrect, enter your phone number in international format yourself or click the button below😉"
+        },
         "profile_change_field": {
-            "text": "Recorded %var%: <b>%var%</b>. What do you want to change it to?"
+            "text": "Recorded \"<b>%var%: %var%</b>\". What do you want to change it to?"
         },
         "title_main_menu": {
             "text": "🏡Main menu🏡"
@@ -236,17 +254,20 @@
         "profile_btn_edit_birth_day": {
             "text": "День рождения"
         },
-        "profile_btn_edit_phone_number": {
-            "text": "Телефон"
-        },
         "profile_btn_edit_ntrp": {
             "text": "Уровень NTRP"
+        },
+        "profile_btn_edit_phone_number": {
+            "text": "Телефон"
         },
         "profile_btn_edit_tennis_experience": {
             "text": "Опыт игры в теннис"
         },
         "profile_btn_edit_description": {
             "text": "Доп. информация"
+        },
+        "profile_btn_edit_gender": {
+            "text": "Пол"
         },
         "profile_btn_delete_yes": {
             "text": "Да"
@@ -284,8 +305,23 @@
         "profile_error_last_name": {
             "text": "Фамилия должна состоять из символов кириллицы или латиницы, не менее 2 символов, скорректируй пожалуйста. Ты ввёл \"%var%\""
         },
+        "profile_error_ntrp": {
+            "text": "Ты неверно указал свой NTRP уровень, обычно это число от 1 до 7, возможны нецелые значения типа 2,5. Ты ввёл \"%var%\"\n\n Укажи в правильном формате.⬇️"
+        },
+        "profile_error_tennis_experience": {
+            "text": "Напиши более двух символов"
+        },
+        "profile_error_description": {
+            "text": "Напиши более двух символов"
+        },
+        "profile_error_birth_day": {
+            "text": "Укажи свою дату рождения в таком формате: DD.MM.YYYY"
+        },
+        "profile_error_phone_number": {
+            "text": "Номер телефона указан неверно, введи свой телефон в международном формате сам или нажми кнопку ниже😉"
+        },
         "profile_change_field": {
-            "text": "Записано %var%: <b>%var%</b>. На что хочешь поменять?"
+            "text": "Записано \"<b>%var% : %var%</b>\". На что хочешь поменять?"
         },
         "title_main_menu": {
             "text": "🏡Главное меню🏡"

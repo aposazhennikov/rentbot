@@ -74,7 +74,7 @@ class User:
         args = [
             "first_name",
             "last_name",
-            "user_name",
+            "gender",
             "phone_number",
             "birth_day",
             "ntrp",
@@ -114,6 +114,17 @@ class User:
             with self.conn:
                 self.cursor.execute(
                     f"DELETE FROM {self.scheme}.users WHERE id = %s", (self.chat_id,))
+            return True
+        except psycopg2.Error as e:
+            return False
+
+    # this function remove user from vision
+    async def remove(self):
+        print('remove user')
+        try:
+            with self.conn:
+                self.cursor.execute(
+                    f"UPDATE {self.scheme}.users SET status=1 WHERE id = %s", (self.chat_id,))
             return True
         except psycopg2.Error as e:
             return False

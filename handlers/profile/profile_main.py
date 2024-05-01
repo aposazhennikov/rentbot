@@ -22,6 +22,7 @@ async def command_profile_handler(message: Message) -> None:
 
 
 async def get_profile_info(chat_id, user_load):
+    # we have to check and print each field if it exists in order. but now from TT
     if (user_load['user_name'] == None):
         message_out = await title.load_title(
             chat_id, 'profile_main_menu_with_username',
