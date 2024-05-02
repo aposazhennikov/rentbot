@@ -18,6 +18,7 @@ async def command_profile_handler(message: Message) -> None:
         message_out = await get_profile_info(message.chat.id, user_load)
         await message.answer(message_out, reply_markup=await markup_profile.main_menu(message.chat.id))
     else:
+        # run registration
         await message.answer('u should reg')
 
 

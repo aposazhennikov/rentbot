@@ -35,7 +35,7 @@ async def send_greetings_and_prompt_name(chat_id: int, field: str, callback: Cal
         await state.set_state(EditProfile.description)
     elif (field == 'phone_number'):
         # share_contact here
-        await callback.message.answer(text=await title.load_title(chat_id, 'profile_title_share_phone'), reply_markup=await markup_profile.choice_gender(chat_id))
+        await callback.message.answer(text=await title.load_title(chat_id, 'profile_title_share_phone'), reply_markup=await markup_profile.share_contact(chat_id))
         await state.set_state(EditProfile.phone_number)
     elif (field == 'birth_day'):
         await state.set_state(EditProfile.birth_day)
@@ -103,9 +103,6 @@ async def edit_last_name(message: Message, state: FSMContext):
 @router_profile_change_field.message(EditProfile.ntrp)
 async def edit_ntrp(message: Message, state: FSMContext):
     field_name = 'ntrp'
-
-    await message.answer(text=await title.load_title(message.chat.id, 'profile_title_choice_gender'), reply_markup=await markup_profile.choice_gender(message.chat.id))
-    await state.set_state(EditProfile.gender)
 
     if message.text:
         # regular expression
