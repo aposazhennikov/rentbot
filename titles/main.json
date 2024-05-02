@@ -1,7 +1,7 @@
 {
     "en": {
         "start_temp_menu": {
-            "text": "Hello, here is commands:\n\n/start - restart\n/profile - your profile\n/help - settings"
+            "text": "Hello, here is commands:\n\n/start - restart\n/profile - your profile\n/court - sign up for the court\n/help - settings"
         },
         "start_greetings_first": {
             "text": "Hi, Im bot <b>Rafa</b>! Lets make your profile."
@@ -204,6 +204,21 @@
         "btn_back": {
             "text": "Back"
         },
+        "court_main": {
+            "text": "Sign up for the court"
+        },
+        "court_btn_court_1": {
+            "text": "Court No. 1"
+        },
+        "court_btn_court_2": {
+            "text": "Court No. 2"
+        },
+        "court_btn_location": {
+            "text": "🌐Court location🌐"
+        },
+        "court_btn_schedule": {
+            "text": "🕑View schedule🕑"
+        },
         "system_error_not_text": {
             "text": "bot did not receive the text format"
         },
@@ -213,7 +228,7 @@
     },
     "ru": {
         "start_temp_menu": {
-            "text": "Привет, выбери пункт меню:\n\n/start - перезапуск\n/profile - твой профиль\n/help - настройки"
+            "text": "Привет, выбери пункт меню:\n\n/start - перезапуск\n/profile - твой профиль\n/court - запись на корт\n/help - настройки"
         },
         "start_greetings_first": {
             "text": "Привет. Меня зовут бот Рафа и я буду твоим проводником и помощником по теннисным тренировкам на корте в Овсянниковском саду. Только сначала давай ты расскажешь немного о себе, а потом я покажу тебе как записаться на корт и другие возможности."
@@ -415,6 +430,21 @@
         },
         "btn_back": {
             "text": "Назад"
+        },
+        "court_main": {
+            "text": "Запись на корты"
+        },
+        "court_btn_court_1": {
+            "text": "Корт №1"
+        },
+        "court_btn_court_2": {
+            "text": "Корт №2"
+        },
+        "court_btn_location": {
+            "text": "🌐Расположение кортов🌐"
+        },
+        "court_btn_schedule": {
+            "text": "🕑Посмотреть расписание🕑"
         },
         "system_error_not_text": {
             "text": "бот не получил текстовый формат"

@@ -7,7 +7,9 @@ from config import *
 from handlers.registration import router_registration
 from handlers.help import router_help
 from handlers.profile.profile_main import router_profile
+from handlers.court.court_main import router_court
 from handlers.profile.profile_callback import router_profile_callback
+from handlers.court.court_callback import router_court_callback
 from handlers.profile.change_field import router_profile_change_field
 from handlers.callback import router_main_callback
 from logs import rent_logger
@@ -41,6 +43,10 @@ async def main() -> None:
 
     # ===== MAIN MENU BLOCK =====
     dp.include_router(router_main_callback)
+
+    # ===== COURT BLOCK =====
+    dp.include_router(router_court)
+    dp.include_router(router_court_callback)
 
     # And the run events dispatching
     await dp.start_polling(bot)
