@@ -31,7 +31,7 @@ async def edit_menu(chat_id):
     user_manager = User(None)
 
     # structure = ['firstname', 'lastname', ... etc]
-    structure = await user_manager.get_structure_profile_edit()
+    structure = await user_manager.get_fields_profile()
 
     # lets make inline buttons for each
     for item in structure:
@@ -80,8 +80,8 @@ async def choice_gender(chat_id):
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text=title_male,
-                              callback_data=f'profile-gender-male'),
-            InlineKeyboardButton(text=title_female, callback_data=f'profile-gender-female')],
+                              callback_data=f'gender-male'),
+            InlineKeyboardButton(text=title_female, callback_data=f'gender-female')],
     ])
 
     return keyboard

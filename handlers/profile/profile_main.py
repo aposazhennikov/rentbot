@@ -23,16 +23,23 @@ async def command_profile_handler(message: Message) -> None:
 
 async def get_profile_info(chat_id, user_load):
     # we have to check and print each field if it exists in order. but now from TT
-    if (user_load['user_name'] == None):
-        message_out = await title.load_title(
-            chat_id, 'profile_main_menu_with_username',
-            user_load['first_name'], user_load['last_name'], user_load['birth_day'],
-            user_load['ntrp'], user_load['tennis_experience'],
-            user_load['phone_number'], user_load['description'])
-    else:
-        message_out = await title.load_title(
-            chat_id, 'profile_main_menu_without_username',
-            user_load['first_name'], user_load['last_name'], user_load['birth_day'],
-            user_load['ntrp'], user_load['tennis_experience'], user_load['user_name'],
-            user_load['phone_number'], user_load['description'])
-    return message_out
+
+    out = await title.load_title(chat_id, 'profile_main_menu')
+    user_manager = User(chat_id)
+    fields = await user_manager.get_fields_profile()
+
+    for field in fields:
+        if (user_load[field] != None):
+            if field == 'gender':
+                if user_load[field] == 'male':
+                    field_value = "🚹"
+                elif user_load[field] == 'female':
+                    field_value = "🚺"
+                else:
+                    field_value = user_load[field]
+            else:
+                field_value = user_load[field]
+            title_field = await title.load_title(chat_id, f'title_field_{field}')
+            capitalized_word = title_field[0].upper() + title_field[1:]
+            out += f'<b>{capitalized_word}</b> : {field_value}\n'
+    return out

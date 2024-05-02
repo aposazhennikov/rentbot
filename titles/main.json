@@ -45,6 +45,9 @@
         "reg_finish": {
             "text": "Registration is done!\n\nHere is your card:"
         },
+        "profile_main_menu": {
+            "text": "Your profile in the bot:\n\n"
+        },
         "profile_main_menu_with_username": {
             "text": "Your profile in the bot:\n\n%var% %var%\nBirthday: %var%\nNTRP: %var%\nTennis experience: %var%\nUser name in telegram: %var%\nPhone: %var%\nOptional: %var%"
         },
@@ -123,6 +126,9 @@
         "profile_new_description": {
             "text": "Additional user information successfully changed to \"%var%\""
         },
+        "profile_new_gender": {
+            "text": "Gender successfully changed"
+        },
         "profile_error_first_name": {
             "text": "The first name must consist of Cyrillic or Latin characters, at least 2 characters, please correct. You entred \"%var%\""
         },
@@ -143,6 +149,9 @@
         },
         "profile_error_phone_number": {
             "text": "The phone number is incorrect, enter your phone number in international format yourself or click the button below😉"
+        },
+        "profile_error_gender": {
+            "text": "Please indicate your gender"
         },
         "profile_change_field": {
             "text": "Recorded \"<b>%var%: %var%</b>\". What do you want to change it to?"
@@ -248,6 +257,9 @@
         "reg_finish": {
             "text": "Отличная работа, регистрация завершена!\n\nВот твоя карточка:"
         },
+        "profile_main_menu": {
+            "text": "Твой профиль в боте:\n\n"
+        },
         "profile_main_menu_with_username": {
             "text": "Твой профиль в боте:\n\n%var% %var%\nДень рождения: %var%\nNTRP: %var%\nОпыт игры в теннис: %var%\nUser name в telegram: %var%\nТелефон: %var%\nДополнительно: %var%"
         },
@@ -326,6 +338,9 @@
         "profile_new_description": {
             "text": "Доп. информация пользователя успешно изменена на \"%var%\""
         },
+        "profile_new_gender": {
+            "text": "Пол успешно изменен"
+        },
         "profile_error_first_name": {
             "text": "Имя должно состоять из символов кириллицы или латиницы, не менее 2 символов, скорректируй пожалуйста. Ты ввёл \"%var%\""
         },
@@ -346,6 +361,9 @@
         },
         "profile_error_phone_number": {
             "text": "Номер телефона указан неверно, введи свой телефон в международном формате сам или нажми кнопку ниже😉"
+        },
+        "profile_error_gender": {
+            "text": "Пожалуйста укажи свой пол"
         },
         "profile_change_field": {
             "text": "Записано \"<b>%var% : %var%</b>\". На что хочешь поменять?"

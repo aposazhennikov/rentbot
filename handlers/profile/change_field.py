@@ -9,6 +9,7 @@ from titles import title
 from aiogram import Router
 from handlers.profile import profile_main
 from markups import markup_profile
+import re
 
 router_profile_change_field = Router()
 
@@ -102,6 +103,9 @@ async def edit_last_name(message: Message, state: FSMContext):
 @router_profile_change_field.message(EditProfile.ntrp)
 async def edit_ntrp(message: Message, state: FSMContext):
     field_name = 'ntrp'
+
+    await message.answer(text=await title.load_title(message.chat.id, 'profile_title_choice_gender'), reply_markup=await markup_profile.choice_gender(message.chat.id))
+    await state.set_state(EditProfile.gender)
 
     if message.text:
         # regular expression
@@ -258,23 +262,35 @@ async def edit_gender(message: Message, state: FSMContext):
     field_name = 'gender'
 
     if message.text:
-        string = await title.filter_symbols(message.text, 255, 'string')
-
-        if string is not False and len(string) > 2:
-            await state.update_data(gender=string)
-            # data = await state.get_data()
-            message_out = await title.load_title(message.chat.id, f'profile_new_{field_name}', string)
-            user_manager = User(message.chat.id)
-            params = {field_name: str(string)}
-            await user_manager.update(params)
-            await message.answer(message_out)
-            await profile_main.command_profile_handler(message)
-            await state.clear()
-        else:
-            message_out = await title.load_title(message.chat.id, f'profile_error_{field_name}', string)
-            await message.answer(message_out)
-            await state.set_state(EditProfile.gender)
+        print(f'skip')
     else:
-        message_out = await title.load_title(message.chat.id, f'profile_error_{field_name}', await title.load_title(message.chat.id, 'system_error_not_text'))
-        await message.answer(message_out)
-        await state.set_state(EditProfile.gender)
+        print(f'skip')
+
+
+@router_profile_change_field.callback_query(lambda c: re.match(r'gender', c.data))
+async def reg_ntrp(callback: CallbackQuery, state: FSMContext):
+    split = callback.data.split('-')
+    prefix, arg = split
+    field_name = 'gender'
+
+    await callback.answer(f'{prefix} {arg}')
+
+    if arg == 'male':
+        user_manager = User(callback.message.chat.id)
+        params = {'gender': str(arg)}
+        await user_manager.update(params)
+        await callback.message.edit_text(await title.load_title(callback.message.chat.id, f'profile_new_{field_name}'))
+        await profile_main.command_profile_handler(callback.message)
+        await state.clear()
+        print('male')
+        # await callback.message.edit_text(message_out, reply_markup=None)
+        # await state.set_state(Registration.ntrp)
+    elif arg == 'female':
+        user_manager = User(callback.message.chat.id)
+        params = {'gender': str(arg)}
+        await user_manager.update(params)
+        await callback.message.edit_text(await title.load_title(callback.message.chat.id, f'profile_new_{field_name}'))
+        await profile_main.command_profile_handler(callback.message)
+        await state.clear()
+        print('female')
+        # await callback.message.edit_text(message_out,reply_markup=await markup_registration.inline_ntrp_accept(callback.message.chat.id))

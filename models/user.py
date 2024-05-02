@@ -48,10 +48,10 @@ class User:
                     cur.execute(
                         f"""SELECT id, birth_day, ntrp, first_name, last_name, 
                         tennis_experience, phone_number, user_name, description, 
-                        created_at FROM {self.scheme}.users WHERE id=%s""", (self.chat_id,))
+                        created_at, gender, id_status FROM {self.scheme}.users WHERE id=%s""", (self.chat_id,))
                     result = cur.fetchone()
 
-            if result and len(result) == 10:
+            if result and len(result) == 12:
                 # PLS NO HARDCODE
                 return {
                     "id": result[0],
@@ -64,13 +64,15 @@ class User:
                     "user_name": result[7],
                     "description": result[8],
                     "created_at": result[9],
+                    "gender": result[10],
+                    "id_status": result[11],
                 }
             else:
                 return None
         except psycopg2.Error as e:
             return None
 
-    async def get_structure_profile_edit(self):
+    async def get_fields_profile(self):
         args = [
             "first_name",
             "last_name",

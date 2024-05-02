@@ -14,11 +14,8 @@ from models.user import User
 router_profile_callback = Router()
 
 
-''' NEED TO ADD DESCRIPTION '''
 # Тут бы пояснения что лямбда делает...
 # lambda c это c= callback, где мы c.data из этого вытаскиваем и проверяем начинается ли они с префикса нам нужного
-
-
 @router_profile_callback.callback_query(lambda c: re.match(r'profile-', c.data))
 async def handle_profile_callback(callback: CallbackQuery, state=FSMContext):
     split = callback.data.split('-')
