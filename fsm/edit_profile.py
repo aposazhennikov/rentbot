@@ -9,3 +9,4 @@ class EditProfile(StatesGroup):
     birth_day = State()
     phone_number = State()
     description = State()
+    gender = State()

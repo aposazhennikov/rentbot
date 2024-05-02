@@ -41,6 +41,9 @@ async def load_title(chat_id, title_name, *args):
         text_out = translations[language][title_name].get('text')
         # Changing %var% in our string to value, which we get from "var"
         for arg in args:
+            if arg is None or arg == 'None':
+                # print('old_value is None')
+                arg = translations[language]['system_title_none'].get('text')
             text_out = text_out.replace('%var%', arg, 1)
 
         return text_out

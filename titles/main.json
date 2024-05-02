@@ -96,6 +96,9 @@
         "profile_btn_delete_no": {
             "text": "No"
         },
+        "profile_btn_share_contact": {
+            "text": "Share contact"
+        },
         "profile_new_first_name": {
             "text": "Name successfully changed to \"%var%\""
         },
@@ -144,6 +147,12 @@
         "profile_change_field": {
             "text": "Recorded \"<b>%var%: %var%</b>\". What do you want to change it to?"
         },
+        "profile_title_share_phone": {
+            "text": "Так же можно воспользоваться инструментом. \"Поделиться номером телефона\"⬇️"
+        },
+        "profile_title_choice_gender": {
+            "text": "Indicate your gender:"
+        },
         "title_main_menu": {
             "text": "🏡Main menu🏡"
         },
@@ -171,11 +180,26 @@
         "title_field_description": {
             "text": "description"
         },
+        "title_field_gender": {
+            "text": "gender"
+        },
         "title_delete_success": {
             "text": "Profile successfully deleted"
         },
+        "title_gender_male": {
+            "text": "Male 🚹"
+        },
+        "title_gender_female": {
+            "text": "Female 🚺"
+        },
         "btn_back": {
             "text": "Back"
+        },
+        "system_error_not_text": {
+            "text": "bot did not receive the text format"
+        },
+        "system_title_none": {
+            "text": "not indicated"
         }
     },
     "ru": {
@@ -275,6 +299,9 @@
         "profile_btn_delete_no": {
             "text": "Нет"
         },
+        "profile_btn_share_contact": {
+            "text": "Поделиться номером"
+        },
         "profile_new_first_name": {
             "text": "Имя успешно изменено на \"%var%\""
         },
@@ -323,6 +350,12 @@
         "profile_change_field": {
             "text": "Записано \"<b>%var% : %var%</b>\". На что хочешь поменять?"
         },
+        "profile_title_share_phone": {
+            "text": "Так же можешь воспользоваться кнопкой. \"Поделиться номером телефона\"⬇️"
+        },
+        "profile_title_choice_gender": {
+            "text": "Укажи свой пол:"
+        },
         "title_main_menu": {
             "text": "🏡Главное меню🏡"
         },
@@ -350,11 +383,26 @@
         "title_field_description": {
             "text": "доп. информация"
         },
+        "title_field_gender": {
+            "text": "пол"
+        },
         "title_delete_success": {
             "text": "Анкета успешно удалена"
         },
+        "title_gender_male": {
+            "text": "Мужской 🚹"
+        },
+        "title_gender_female": {
+            "text": "Женский 🚺"
+        },
         "btn_back": {
             "text": "Назад"
+        },
+        "system_error_not_text": {
+            "text": "бот не получил текстовый формат"
+        },
+        "system_title_none": {
+            "text": "не указано"
         }
     }
 }

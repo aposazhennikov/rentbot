@@ -2,10 +2,12 @@
 """В будущем здесь будеть кнопка найти оппонента, 
 когда мы реализуем функцию рейтинга"""
 
-from aiogram.types import (InlineKeyboardButton, InlineKeyboardMarkup)
+from aiogram.types import (
+    InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup)
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from titles import title
 from models.user import User
+from aiogram.types import KeyboardButton
 
 
 async def main_menu(chat_id):
@@ -58,6 +60,28 @@ async def delete_menu(chat_id):
             InlineKeyboardButton(text=title_delete_no, callback_data=f'profile-main')],
         [InlineKeyboardButton(text=title_main_menu,
                               callback_data=f'main-menu')],
+    ])
+
+    return keyboard
+
+
+async def share_contact(chat_id):
+    keyboard = ReplyKeyboardMarkup(keyboard=[
+        [KeyboardButton(text=await title.load_title(chat_id, 'profile_btn_share_contact'), request_contact=True)],
+    ],
+        resize_keyboard=True, one_time_keyboard=True)
+
+    return keyboard
+
+
+async def choice_gender(chat_id):
+    title_male = await title.load_title(chat_id, 'title_gender_male')
+    title_female = await title.load_title(chat_id, 'title_gender_female')
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text=title_male,
+                              callback_data=f'profile-gender-male'),
+            InlineKeyboardButton(text=title_female, callback_data=f'profile-gender-female')],
     ])
 
     return keyboard
