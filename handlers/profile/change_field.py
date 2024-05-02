@@ -17,7 +17,15 @@ router_profile_change_field = Router()
 async def send_greetings_and_prompt_name(chat_id: int, field: str, callback: CallbackQuery = None, state: FSMContext = None):
     user_manager = User(chat_id)
     user_load = await user_manager.get_user_args(field)
-    old_value = user_load[field]
+    if field == 'gender':
+        if user_load[field] == 'male':
+            old_value = "🚹"
+        elif user_load[field] == 'female':
+            old_value = "🚺"
+        else:
+            old_value = user_load[field]
+    else:
+        old_value = user_load[field]
 
     message_out = await title.load_title(chat_id, 'profile_change_field', await title.load_title(
         chat_id, f'title_field_{field}'), old_value)
