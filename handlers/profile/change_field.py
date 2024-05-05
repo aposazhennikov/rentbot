@@ -2,7 +2,7 @@
 from titles import title
 from models.user import User
 from config import *
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
 from aiogram.fsm.context import FSMContext
 from fsm.edit_profile import EditProfile
 from titles import title
@@ -234,7 +234,7 @@ async def edit_phone_number(message: Message, state: FSMContext):
         user_manager = User(message.chat.id)
         params = {field_name: str(phone_number)}
         await user_manager.update(params)
-        await message.answer(message_out)
+        await message.answer(message_out, reply_markup=ReplyKeyboardRemove())
         await profile_main.command_profile_handler(message)
         await state.clear()
     elif message.text:
@@ -249,8 +249,9 @@ async def edit_phone_number(message: Message, state: FSMContext):
             user_manager = User(message.chat.id)
             params = {field_name: str(string)}
             await user_manager.update(params)
-            await message.answer(message_out)
+            await message.answer(message_out, reply_markup=ReplyKeyboardRemove())
             await profile_main.command_profile_handler(message)
+            # ReplyKeyboardRemove()
             await state.clear()
         else:
             message_out = await title.load_title(message.chat.id, f'profile_error_{field_name}', message.text)
