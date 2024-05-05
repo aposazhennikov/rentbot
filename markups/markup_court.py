@@ -7,6 +7,7 @@ from aiogram.types import (
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from titles import title
 from models.user import User
+from models.class_court import Calendar
 from aiogram.types import KeyboardButton
 
 
@@ -19,12 +20,12 @@ async def main_menu(chat_id):
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text=title_court_1,
-                              callback_data=f'court-show-first'),
-            InlineKeyboardButton(text=title_court_2, callback_data=f'court-show-second')],
+                              callback_data=f'court-show-1'),
+            InlineKeyboardButton(text=title_court_2, callback_data=f'court-show-2')],
         [InlineKeyboardButton(text=title_location,
                               callback_data=f'court-show-location')],
         [InlineKeyboardButton(text=title_schedule,
-                              callback_data=f'court-schedule')],
+                              callback_data=f'court-show-schedule')],
         [InlineKeyboardButton(text=title_main_menu,
                               callback_data=f'main-menu')],
     ])
@@ -32,62 +33,112 @@ async def main_menu(chat_id):
     return keyboard
 
 
-async def edit_menu(chat_id):
-    keyboard_builder = InlineKeyboardBuilder()
-    user_manager = User(None)
+async def time_confirm(chat_id, id_court, date, time_start, time_end):
+    title_yes = await title.load_title(chat_id, 'profile_btn_delete_yes')
+    title_no = await title.load_title(chat_id, 'profile_btn_delete_no')
 
-    # structure = ['firstname', 'lastname', ... etc]
-    structure = await user_manager.get_fields_profile()
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text=title_yes,
+                              callback_data=f'court-book-{id_court}-{date}-{time_start}-{time_end}'),
+            InlineKeyboardButton(text=title_no, callback_data=f'court-get-timestart-{id_court}-{date}-{time_start}')],
+        [InlineKeyboardButton(
+            text=await title.load_title(chat_id, 'btn_back'), callback_data=f'court-get-day-{id_court}-{date}')],
+    ])
+
+    return keyboard
+
+
+async def days_menu(chat_id, id_court):
+    keyboard_builder = InlineKeyboardBuilder()
+    court_manager = Calendar(chat_id)
+    structure = await court_manager.get_days()
 
     # lets make inline buttons for each
     for item in structure:
+        callback = item[:10]
         btn = InlineKeyboardButton(
-            text=await title.load_title(chat_id, f'profile_btn_edit_{item}'), callback_data=f'profile-edit-{item}')
+            text=item, callback_data=f'court-get-day-{id_court}-{callback}')
         keyboard_builder.add(btn)
 
     # button back to profile menu
     btn_back = InlineKeyboardButton(
-        text=await title.load_title(chat_id, 'btn_back'), callback_data='profile-main')
+        text=await title.load_title(chat_id, 'btn_back'), callback_data='court-main')
     keyboard_builder.add(btn_back)
 
-    keyboard_builder.adjust(2).as_markup()
-
-    return keyboard_builder.adjust(2).as_markup()
+    return keyboard_builder.adjust(3).as_markup()
 
 
-async def delete_menu(chat_id):
-    title_delete_yes = await title.load_title(chat_id, 'profile_btn_delete_yes')
-    title_delete_no = await title.load_title(chat_id, 'profile_btn_delete_no')
-    title_main_menu = await title.load_title(chat_id, 'title_main_menu')
+async def location(chat_id, id_court):
+    keyboard_builder = InlineKeyboardBuilder()
 
-    keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=title_delete_yes,
-                              callback_data=f'profile-delete-confirm'),
-            InlineKeyboardButton(text=title_delete_no, callback_data=f'profile-main')],
-        [InlineKeyboardButton(text=title_main_menu,
-                              callback_data=f'main-menu')],
-    ])
+    # button back to profile menu
+    btn_back = InlineKeyboardButton(
+        text=await title.load_title(chat_id, 'btn_back'), callback_data='court-main')
+    keyboard_builder.add(btn_back)
 
-    return keyboard
+    return keyboard_builder.adjust(1).as_markup()
 
 
-async def share_contact(chat_id):
-    keyboard = ReplyKeyboardMarkup(keyboard=[
-        [KeyboardButton(text=await title.load_title(chat_id, 'profile_btn_share_contact'), request_contact=True)],
-    ],
-        resize_keyboard=True, one_time_keyboard=True)
+async def schedule(chat_id, id_court):
+    keyboard_builder = InlineKeyboardBuilder()
 
-    return keyboard
+    # button back to profile menu
+    btn_back = InlineKeyboardButton(
+        text=await title.load_title(chat_id, 'btn_back'), callback_data='court-main')
+    keyboard_builder.add(btn_back)
+
+    return keyboard_builder.adjust(1).as_markup()
 
 
-async def choice_gender(chat_id):
-    title_male = await title.load_title(chat_id, 'title_gender_male')
-    title_female = await title.load_title(chat_id, 'title_gender_female')
+async def time_start_menu(chat_id, id_court, date):
+    keyboard_builder = InlineKeyboardBuilder()
+    court_manager = Calendar(chat_id)
+    structure = await court_manager.get_time()
 
-    keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=title_male,
-                              callback_data=f'gender-male'),
-            InlineKeyboardButton(text=title_female, callback_data=f'gender-female')],
-    ])
+    # lets make inline buttons for each
+    for time in structure:
+        btn = InlineKeyboardButton(
+            text=time, callback_data=f'court-get-timestart-{id_court}-{date}-{time}')
+        keyboard_builder.add(btn)
 
-    return keyboard
+    # button back to profile menu
+    btn_back = InlineKeyboardButton(
+        text=await title.load_title(chat_id, 'btn_back'), callback_data=f'court-show-{id_court}')
+    keyboard_builder.add(btn_back)
+
+    return keyboard_builder.adjust(6).as_markup()
+
+
+async def time_end_menu(chat_id, id_court, date, time_start):
+    keyboard_builder = InlineKeyboardBuilder()
+    court_manager = Calendar(chat_id)
+    structure = await court_manager.get_time()
+    q_slots_we_print = 1
+
+    # lets make inline buttons for each
+    for time in structure:
+        split_ts = time_start.split(':')
+        split_t = time.split(':')
+        time_start_int = int(split_ts[0])
+        time_int = int(split_t[0])
+
+        if time_start == time:
+            q_slots_we_print += 1
+            title_btn = f'✅{time} ->'
+            btn = InlineKeyboardButton(
+                text=title_btn, callback_data=f'court-get-timeend-{id_court}-{date}-{time_start}-{time}')
+            keyboard_builder.add(btn)
+
+        if (time_start_int < time_int and court_manager.max_slots >= q_slots_we_print):
+            q_slots_we_print += 1
+            title_btn = time
+            btn = InlineKeyboardButton(
+                text=title_btn, callback_data=f'court-get-timeend-{id_court}-{date}-{time_start}-{time}')
+            keyboard_builder.add(btn)
+
+    # button back to profile menu
+    btn_back = InlineKeyboardButton(
+        text=await title.load_title(chat_id, 'btn_back'), callback_data=f'court-get-day-{id_court}-{date}')
+    keyboard_builder.add(btn_back)
+
+    return keyboard_builder.adjust(3).as_markup()

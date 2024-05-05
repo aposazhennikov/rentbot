@@ -157,7 +157,7 @@
             "text": "Recorded \"<b>%var%: %var%</b>\". What do you want to change it to?"
         },
         "profile_title_share_phone": {
-            "text": "Так же можно воспользоваться инструментом. \"Поделиться номером телефона\"⬇️"
+            "text": "You can also use the tool. \"Share phone number\"⬇️"
         },
         "profile_title_choice_gender": {
             "text": "Indicate your gender:"
@@ -201,6 +201,27 @@
         "title_gender_female": {
             "text": "Female 🚺"
         },
+        "title_weekday_short_0": {
+            "text": "mo"
+        },
+        "title_weekday_short_1": {
+            "text": "tu"
+        },
+        "title_weekday_short_2": {
+            "text": "we"
+        },
+        "title_weekday_short_3": {
+            "text": "th"
+        },
+        "title_weekday_short_4": {
+            "text": "fr"
+        },
+        "title_weekday_short_5": {
+            "text": "sa"
+        },
+        "title_weekday_short_6": {
+            "text": "su"
+        },
         "btn_back": {
             "text": "Back"
         },
@@ -218,6 +239,15 @@
         },
         "court_btn_schedule": {
             "text": "🕑View schedule🕑"
+        },
+        "court_schedule": {
+            "text": "Schedule"
+        },
+        "court_location": {
+            "text": "Location"
+        },
+        "court_choice_day": {
+            "text": "Select a day"
         },
         "system_error_not_text": {
             "text": "bot did not receive the text format"
@@ -428,6 +458,27 @@
         "title_gender_female": {
             "text": "Женский 🚺"
         },
+        "title_weekday_short_0": {
+            "text": "пн"
+        },
+        "title_weekday_short_1": {
+            "text": "вт"
+        },
+        "title_weekday_short_2": {
+            "text": "ср"
+        },
+        "title_weekday_short_3": {
+            "text": "чт"
+        },
+        "title_weekday_short_4": {
+            "text": "пт"
+        },
+        "title_weekday_short_5": {
+            "text": "сб"
+        },
+        "title_weekday_short_6": {
+            "text": "вс"
+        },
         "btn_back": {
             "text": "Назад"
         },
@@ -445,6 +496,15 @@
         },
         "court_btn_schedule": {
             "text": "🕑Посмотреть расписание🕑"
+        },
+        "court_schedule": {
+            "text": "Расписание"
+        },
+        "court_location": {
+            "text": "Расположение"
+        },
+        "court_choice_day": {
+            "text": "Выберите день"
         },
         "system_error_not_text": {
             "text": "бот не получил текстовый формат"

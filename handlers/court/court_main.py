@@ -16,7 +16,6 @@ async def command_court_handler(message: Message) -> None:
 
     if (user_load):
         # message_out = await get_court_menu(message.chat.id, user_load)
-
         await message.answer(await title.load_title(message.chat.id, 'court_main'), reply_markup=await markup_court.main_menu(message.chat.id))
     else:
         # run registration
