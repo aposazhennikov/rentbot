@@ -1,5 +1,8 @@
 {
     "en": {
+        "start_temp_menu": {
+            "text": "Hello, here is commands:\n\n/start - restart\n/profile - your profile\n/help - settings"
+        },
         "start_greetings_first": {
             "text": "Hi, Im bot <b>Rafa</b>! Lets make your profile."
         },
@@ -43,16 +46,175 @@
             "text": "Registration is done!\n\nHere is your card:"
         },
         "profile_main_menu": {
-            "text": "Profile of user <b>%var%</b>"
+            "text": "Your profile in the bot:\n\n"
+        },
+        "profile_main_menu_with_username": {
+            "text": "Your profile in the bot:\n\n%var% %var%\nBirthday: %var%\nNTRP: %var%\nTennis experience: %var%\nUser name in telegram: %var%\nPhone: %var%\nOptional: %var%"
+        },
+        "profile_main_menu_without_username": {
+            "text": "Your profile in the bot:\n\n%var% %var%\nBirthday: %var%\nNTRP: %var%\nTennis experience: %var%\nPhone: %var%\nOptional: %var%"
         },
         "profile_btn_edit": {
             "text": "Edit"
         },
         "profile_btn_delete": {
             "text": "Delete"
+        },
+        "profile_title_edit": {
+            "text": "Editing a profile.\n\nWhat exactly do you want to edit?"
+        },
+        "profile_title_delete": {
+            "text": "Are you sure you want to delete your profile?"
+        },
+        "profile_btn_edit_first_name": {
+            "text": "First name"
+        },
+        "profile_btn_edit_last_name": {
+            "text": "Last name"
+        },
+        "profile_btn_edit_user_name": {
+            "text": "User name telegram"
+        },
+        "profile_btn_edit_birth_day": {
+            "text": "Birth day"
+        },
+        "profile_btn_edit_ntrp": {
+            "text": "NTRP level"
+        },
+        "profile_btn_edit_phone_number": {
+            "text": "Phone"
+        },
+        "profile_btn_edit_tennis_experience": {
+            "text": "Tennis experience"
+        },
+        "profile_btn_edit_description": {
+            "text": "Add. Info"
+        },
+        "profile_btn_edit_gender": {
+            "text": "Gender"
+        },
+        "profile_btn_delete_yes": {
+            "text": "Yes"
+        },
+        "profile_btn_delete_no": {
+            "text": "No"
+        },
+        "profile_btn_share_contact": {
+            "text": "Share contact"
+        },
+        "profile_new_first_name": {
+            "text": "Name successfully changed to \"%var%\""
+        },
+        "profile_new_last_name": {
+            "text": "Last name successfully changed to \"%var%\""
+        },
+        "profile_new_user_name": {
+            "text": "Username successfully changed to \"%var%\""
+        },
+        "profile_new_phone_number": {
+            "text": "User phone number successfully changed to \"%var%\""
+        },
+        "profile_new_birth_day": {
+            "text": "User's date of birth was successfully changed to \"%var%\""
+        },
+        "profile_new_ntrp": {
+            "text": "User NTRP level successfully changed to \"%var%\""
+        },
+        "profile_new_tennis_experience": {
+            "text": "User's tennis experience successfully changed to \"%var%\""
+        },
+        "profile_new_description": {
+            "text": "Additional user information successfully changed to \"%var%\""
+        },
+        "profile_new_gender": {
+            "text": "Gender successfully changed"
+        },
+        "profile_error_first_name": {
+            "text": "The first name must consist of Cyrillic or Latin characters, at least 2 characters, please correct. You entred \"%var%\""
+        },
+        "profile_error_last_name": {
+            "text": "The last name must consist of Cyrillic or Latin characters, at least 2 characters, please correct. You entred \"%var%\""
+        },
+        "profile_error_ntrp": {
+            "text": "You entered your NTRP level incorrectly, usually this is a number from 1 to 7, non-integer values like 2.5 are possible. You entered \"%var%\"\n\n Please enter in the correct format.⬇️"
+        },
+        "profile_error_birth_day": {
+            "text": "Indicate your date of birth in this format: DD.MM.YYYY"
+        },
+        "profile_error_tennis_experience": {
+            "text": "Write more than two characters"
+        },
+        "profile_error_description": {
+            "text": "Write more than two characters"
+        },
+        "profile_error_phone_number": {
+            "text": "The phone number is incorrect, enter your phone number in international format yourself or click the button below😉"
+        },
+        "profile_error_gender": {
+            "text": "Please indicate your gender"
+        },
+        "profile_change_field": {
+            "text": "Recorded \"<b>%var%: %var%</b>\". What do you want to change it to?"
+        },
+        "profile_title_share_phone": {
+            "text": "Так же можно воспользоваться инструментом. \"Поделиться номером телефона\"⬇️"
+        },
+        "profile_title_choice_gender": {
+            "text": "Indicate your gender:"
+        },
+        "title_main_menu": {
+            "text": "🏡Main menu🏡"
+        },
+        "title_field_first_name": {
+            "text": "first name"
+        },
+        "title_field_last_name": {
+            "text": "last name"
+        },
+        "title_field_user_name": {
+            "text": "user name"
+        },
+        "title_field_phone_number": {
+            "text": "phone number"
+        },
+        "title_field_birth_day": {
+            "text": "birth day"
+        },
+        "title_field_ntrp": {
+            "text": "ntrp"
+        },
+        "title_field_tennis_experience": {
+            "text": "tennis experience"
+        },
+        "title_field_description": {
+            "text": "description"
+        },
+        "title_field_gender": {
+            "text": "gender"
+        },
+        "title_delete_success": {
+            "text": "Profile successfully deleted"
+        },
+        "title_gender_male": {
+            "text": "Male 🚹"
+        },
+        "title_gender_female": {
+            "text": "Female 🚺"
+        },
+        "btn_back": {
+            "text": "Back"
+        },
+        "system_error_not_text": {
+            "text": "bot did not receive the text format"
+        },
+        "system_title_none": {
+            "text": "not indicated"
         }
     },
     "ru": {
+        "start_temp_menu": {
+            "text": "Привет, выбери пункт меню:\n\n/start - перезапуск\n/profile - твой профиль\n/help - настройки"
+        },
         "start_greetings_first": {
             "text": "Привет. Меня зовут бот Рафа и я буду твоим проводником и помощником по теннисным тренировкам на корте в Овсянниковском саду. Только сначала давай ты расскажешь немного о себе, а потом я покажу тебе как записаться на корт и другие возможности."
         },
@@ -96,13 +258,169 @@
             "text": "Отличная работа, регистрация завершена!\n\nВот твоя карточка:"
         },
         "profile_main_menu": {
-            "text": "Профиль пользователя <b>%var%</b>"
+            "text": "Твой профиль в боте:\n\n"
+        },
+        "profile_main_menu_with_username": {
+            "text": "Твой профиль в боте:\n\n%var% %var%\nДень рождения: %var%\nNTRP: %var%\nОпыт игры в теннис: %var%\nUser name в telegram: %var%\nТелефон: %var%\nДополнительно: %var%"
+        },
+        "profile_main_menu_without_username": {
+            "text": "Твой профиль в боте:\n\n%var% %var%\nДень рождения: %var%\nNTRP: %var%\nОпыт игры в теннис: %var%\nUser name в telegram: %var%\nТелефон: %var%\nДополнительно: %var%"
         },
         "profile_btn_edit": {
             "text": "Редактировать"
         },
         "profile_btn_delete": {
             "text": "Удалить"
+        },
+        "profile_title_edit": {
+            "text": "Редактирование анкеты.\n\nЧто именно хочешь отредактировать?"
+        },
+        "profile_title_delete": {
+            "text": "Ты уверен что хочешь удалить анкету ?"
+        },
+        "profile_btn_edit_first_name": {
+            "text": "Имя"
+        },
+        "profile_btn_edit_last_name": {
+            "text": "Фамилия"
+        },
+        "profile_btn_edit_user_name": {
+            "text": "Имя пользователя telegram"
+        },
+        "profile_btn_edit_birth_day": {
+            "text": "День рождения"
+        },
+        "profile_btn_edit_ntrp": {
+            "text": "Уровень NTRP"
+        },
+        "profile_btn_edit_phone_number": {
+            "text": "Телефон"
+        },
+        "profile_btn_edit_tennis_experience": {
+            "text": "Опыт игры в теннис"
+        },
+        "profile_btn_edit_description": {
+            "text": "Доп. информация"
+        },
+        "profile_btn_edit_gender": {
+            "text": "Пол"
+        },
+        "profile_btn_delete_yes": {
+            "text": "Да"
+        },
+        "profile_btn_delete_no": {
+            "text": "Нет"
+        },
+        "profile_btn_share_contact": {
+            "text": "Поделиться номером"
+        },
+        "profile_new_first_name": {
+            "text": "Имя успешно изменено на \"%var%\""
+        },
+        "profile_new_last_name": {
+            "text": "Фамилия успешно изменена на \"%var%\""
+        },
+        "profile_new_user_name": {
+            "text": "Имя пользователя успешно изменено на \"%var%\""
+        },
+        "profile_new_phone_number": {
+            "text": "Телефон пользователя успешно изменен на \"%var%\""
+        },
+        "profile_new_birth_day": {
+            "text": "Дата рождения пользователя успешно изменена на \"%var%\""
+        },
+        "profile_new_ntrp": {
+            "text": "NTRP уровень пользователя успешно изменен на \"%var%\""
+        },
+        "profile_new_tennis_experience": {
+            "text": "Опыт игры в теннис  пользователя успешно изменен на \"%var%\""
+        },
+        "profile_new_description": {
+            "text": "Доп. информация пользователя успешно изменена на \"%var%\""
+        },
+        "profile_new_gender": {
+            "text": "Пол успешно изменен"
+        },
+        "profile_error_first_name": {
+            "text": "Имя должно состоять из символов кириллицы или латиницы, не менее 2 символов, скорректируй пожалуйста. Ты ввёл \"%var%\""
+        },
+        "profile_error_last_name": {
+            "text": "Фамилия должна состоять из символов кириллицы или латиницы, не менее 2 символов, скорректируй пожалуйста. Ты ввёл \"%var%\""
+        },
+        "profile_error_ntrp": {
+            "text": "Ты неверно указал свой NTRP уровень, обычно это число от 1 до 7, возможны нецелые значения типа 2,5. Ты ввёл \"%var%\"\n\n Укажи в правильном формате.⬇️"
+        },
+        "profile_error_tennis_experience": {
+            "text": "Напиши более двух символов"
+        },
+        "profile_error_description": {
+            "text": "Напиши более двух символов"
+        },
+        "profile_error_birth_day": {
+            "text": "Укажи свою дату рождения в таком формате: DD.MM.YYYY"
+        },
+        "profile_error_phone_number": {
+            "text": "Номер телефона указан неверно, введи свой телефон в международном формате сам или нажми кнопку ниже😉"
+        },
+        "profile_error_gender": {
+            "text": "Пожалуйста укажи свой пол"
+        },
+        "profile_change_field": {
+            "text": "Записано \"<b>%var% : %var%</b>\". На что хочешь поменять?"
+        },
+        "profile_title_share_phone": {
+            "text": "Так же можешь воспользоваться кнопкой. \"Поделиться номером телефона\"⬇️"
+        },
+        "profile_title_choice_gender": {
+            "text": "Укажи свой пол:"
+        },
+        "title_main_menu": {
+            "text": "🏡Главное меню🏡"
+        },
+        "title_field_first_name": {
+            "text": "имя"
+        },
+        "title_field_last_name": {
+            "text": "фамилия"
+        },
+        "title_field_user_name": {
+            "text": "имя пользователя"
+        },
+        "title_field_phone_number": {
+            "text": "номер телефона"
+        },
+        "title_field_birth_day": {
+            "text": "день рождения"
+        },
+        "title_field_ntrp": {
+            "text": "ntrp"
+        },
+        "title_field_tennis_experience": {
+            "text": "опыт игры в теннис"
+        },
+        "title_field_description": {
+            "text": "доп. информация"
+        },
+        "title_field_gender": {
+            "text": "пол"
+        },
+        "title_delete_success": {
+            "text": "Анкета успешно удалена"
+        },
+        "title_gender_male": {
+            "text": "Мужской 🚹"
+        },
+        "title_gender_female": {
+            "text": "Женский 🚺"
+        },
+        "btn_back": {
+            "text": "Назад"
+        },
+        "system_error_not_text": {
+            "text": "бот не получил текстовый формат"
+        },
+        "system_title_none": {
+            "text": "не указано"
         }
     }
 }
