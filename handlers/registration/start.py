@@ -33,66 +33,82 @@ def run(router):
         ''' NEED TO ADD DESCRIPTION '''
         await message.answer(TITLE_CHOICE, reply_markup=await markup_lang.reply_lang())
 
-    async def send_greetings_and_prompt_name(chat_id: int, message: Message = None, callback: CallbackQuery = None, state: FSMContext = None):
-        ''' NEED TO ADD DESCRIPTION '''
-        user_language = title.get_user_language(chat_id)
 
-        if user_language is None:
-            markup = await markup_lang.reply_lang()
 
+async def send_greetings_and_prompt_name(chat_id: int, message: Message = None, callback: CallbackQuery = None, state: FSMContext = None):
+    user_language = title.get_user_language(chat_id)
+    if user_language is None:
+        markup = await markup_lang.reply_lang()
+        if message:
+            await message.answer(TITLE_CHOICE, reply_markup=markup)
+        elif callback:
+            await callback.message.answer(TITLE_CHOICE, reply_markup=markup)
+    else:
+        user_manager = User()
+        get_user = user_manager.get_user_args(chat_id, 'first_name')
+
+        if get_user and BOT_MODE != 'dev':
+            message_out = title.load_title(
+                chat_id, 'start_greetings', get_user['first_name'])
             if message:
-                await message.answer(TITLE_CHOICE, reply_markup=markup)
+                await message.answer(message_out)
             elif callback:
-                await callback.message.answer(TITLE_CHOICE, reply_markup=markup)
+                await callback.message.edit_text(message_out)
         else:
-            user_manager = User()
-            get_user = user_manager.get_user_args(chat_id, 'first_name')
-
-            if get_user and BOT_MODE != 'dev':
-                message_out = title.load_title(
-                    chat_id, 'start_greetings', get_user['first_name'])
+            if get_user:
+                message_dev = f"DEV MODE. Hey {
+                    get_user['first_name']} 😉 you didnt see this, okay ?"
                 if message:
-                    await message.answer(message_out)
+                    await message.answer(message_dev)
                 elif callback:
-                    await callback.message.edit_text(message_out)
-            else:
-                if get_user:
-                    message_dev = f"DEV MODE. Hey {get_user['first_name']} 😉 you didnt see this, okay ?"
-                    if message:
-                        await message.answer(message_dev)
-                    elif callback:
-                        await callback.message.answer(message_dev)
+                    await callback.message.answer(message_dev)
 
-                message_out = title.load_title(
-                    chat_id, 'start_greetings_first')
-                message_out_reg_fn = title.load_title(
-                    chat_id, 'reg_first_name')
-                if message:
-                    await message.answer(message_out)
-                    time.sleep(2)
-                    await message.answer(message_out_reg_fn)
-                elif callback:
-                    await callback.message.edit_text(message_out)
-                    time.sleep(2)
-                    await callback.message.answer(message_out_reg_fn)
+            message_out = title.load_title(
+                chat_id, 'start_greetings_first')
+            message_out_reg_fn = title.load_title(
+                chat_id, 'reg_first_name')
+            if message:
+                await message.answer(message_out)
+                time.sleep(2)
+                await message.answer(message_out_reg_fn)
+            elif callback:
+                await callback.message.edit_text(message_out)
+                time.sleep(2)
+                await callback.message.answer(message_out_reg_fn)
+            await state.set_state(Registration.first_name)
 
-                await state.set_state(Registration.first_name)
 
-    @router.message(CommandStart())
-    async def command_help_handler(message: Message, state: FSMContext) -> None:
-        ''' NEED TO ADD DESCRIPTION '''
-        await send_greetings_and_prompt_name(message.chat.id, message=message, state=state)
+@router.message(CommandStart())
+async def command_help_handler(message: Message, state: FSMContext) -> None:
+    await send_greetings_and_prompt_name(message.chat.id, message=message, state=state)
 
-    @router.callback_query(lambda c: re.match(r'lang_', c.data))
-    async def reg_ntrp(callback: CallbackQuery, state: FSMContext):
-        ''' NEED TO ADD DESCRIPTION '''
-        split = callback.data.split('_')
-        prefix, lang = split
 
-        if lang:
-            title.save_user_language(callback.message.chat.id, lang)
+@router.callback_query(lambda c: re.match(r'lang_', c.data))
+async def reg_ntrp(callback: CallbackQuery, state: FSMContext):
+    split = callback.data.split('_')
+    prefix, lang = split
+    if lang:
+        title.save_user_language(callback.message.chat.id, lang)
+    await send_greetings_and_prompt_name(callback.message.chat.id, callback=callback, state=state)
 
-        await send_greetings_and_prompt_name(callback.message.chat.id, callback=callback, state=state)
+
+@router.message(Registration.first_name)
+async def reg_first_name(message: Message, state: FSMContext):
+    await state.set_state(Registration.last_name)
+    await state.update_data(first_name=message.text)
+    message_out = title.load_title(
+        message.chat.id, 'reg_last_name', message.text)
+    await message.answer(message_out)
+
+
+@router.message(Registration.last_name)
+async def reg_last_name(message: Message, state: FSMContext):
+    await state.update_data(last_name=message.text)
+    await state.set_state(Registration.tennis_experience)
+    data = await state.get_data()
+    message_out = title.load_title(message.chat.id, 'reg_tennis_experience',
+                                   str(f"{data['first_name']} {message.text}"))
+    await message.answer(message_out)
 
     @router.message(Registration.first_name)
     async def reg_first_name(message: Message, state: FSMContext):
@@ -154,3 +170,4 @@ def run(router):
 
         await message.answer(message_out)
         await state.clear()
+

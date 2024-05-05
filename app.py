@@ -6,6 +6,7 @@ from aiogram.enums import ParseMode
 from config import *
 from handlers.registration import router_start
 from handlers.profile import router_profile
+
 from logs import rent_logger
 
 # file and console loger $path:/logs/errors.log
