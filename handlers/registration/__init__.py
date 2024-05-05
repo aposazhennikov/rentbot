@@ -1,8 +1,8 @@
 from aiogram import Router
 from handlers.registration import start
 from handlers import callback
-router = Router()
+router_start = Router()
 
-start.run(router)
+start.run(router_start)
 
 # callback.run(router)

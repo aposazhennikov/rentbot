@@ -26,9 +26,13 @@ from titles import title
 TITLE_CHOICE = "Выбери язык (Choose a language):"
 
 
-@router.message(Command('help'))
-async def command_help_handler(message: Message) -> None:
-    await message.answer(TITLE_CHOICE, reply_markup=await markup_lang.reply_lang())
+def run(router):
+    ''' temp handlers for change language if user changed the decision '''
+    @router.message(Command('help'))
+    async def command_help_handler(message: Message) -> None:
+        ''' NEED TO ADD DESCRIPTION '''
+        await message.answer(TITLE_CHOICE, reply_markup=await markup_lang.reply_lang())
+
 
 
 async def send_greetings_and_prompt_name(chat_id: int, message: Message = None, callback: CallbackQuery = None, state: FSMContext = None):
@@ -106,43 +110,64 @@ async def reg_last_name(message: Message, state: FSMContext):
                                    str(f"{data['first_name']} {message.text}"))
     await message.answer(message_out)
 
-
-@router.message(Registration.tennis_experience)
-async def reg_ntrp_quest(message: Message, state: FSMContext):
-    await state.update_data(tennis_experience=message.text)
-    message_out = title.load_title(
-        message.chat.id, 'reg_ntrp_quest', message.text)
-    await message.answer(message_out,  reply_markup=await markup_registration.inline_ntrp_quest(message.chat.id))
-
-
-@router.callback_query(lambda c: re.match(r'reg_ntrp', c.data))
-async def reg_ntrp(callback: CallbackQuery, state: FSMContext):
-    split = callback.data.split('_')
-    prefix, action = split
-    await callback.answer(action)
-
-    # No hardcode more PLS
-    if action == 'ntrpyes':
+    @router.message(Registration.first_name)
+    async def reg_first_name(message: Message, state: FSMContext):
+        ''' NEED TO ADD DESCRIPTION '''
+        await state.set_state(Registration.last_name)
+        await state.update_data(first_name=message.text)
         message_out = title.load_title(
-            callback.message.chat.id, 'reg_ntrp_yes')
-        await callback.message.edit_text(message_out, reply_markup=None)
-        await state.set_state(Registration.ntrp)
+            message.chat.id, 'reg_last_name', message.text)
+        await message.answer(message_out)
+
+    @router.message(Registration.last_name)
+    async def reg_last_name(message: Message, state: FSMContext):
+        ''' NEED TO ADD DESCRIPTION '''
+        await state.update_data(last_name=message.text)
+        await state.set_state(Registration.tennis_experience)
+        data = await state.get_data()
+        message_out = title.load_title(message.chat.id, 'reg_tennis_experience',
+                                       str(f"{data['first_name']} {message.text}"))
+        await message.answer(message_out)
+
+    @router.message(Registration.tennis_experience)
+    async def reg_ntrp_quest(message: Message, state: FSMContext):
+        ''' NEED TO ADD DESCRIPTION '''
+        await state.update_data(tennis_experience=message.text)
+        message_out = title.load_title(
+            message.chat.id, 'reg_ntrp_quest', message.text)
+        await message.answer(message_out,  reply_markup=await markup_registration.inline_ntrp_quest(message.chat.id))
+
+    @router.callback_query(lambda c: re.match(r'reg_ntrp', c.data))
+    async def reg_ntrp(callback: CallbackQuery, state: FSMContext):
+        ''' NEED TO ADD DESCRIPTION '''
+        split = callback.data.split('_')
+        prefix, action = split
+        await callback.answer(action)
 
         # No hardcode more PLS
-    elif action == 'ntrpno':
-        message_out = title.load_title(
-            callback.message.chat.id, 'reg_ntrp_no')
-        await callback.message.edit_text(message_out,
-                                         reply_markup=await markup_registration.inline_ntrp_accept(callback.message.chat.id))
+        if action == 'ntrpyes':
+            message_out = title.load_title(
+                callback.message.chat.id, 'reg_ntrp_yes')
+            await callback.message.edit_text(message_out, reply_markup=None)
+            await state.set_state(Registration.ntrp)
 
+        # No hardcode more PLS
+        elif action == 'ntrpno':
+            message_out = title.load_title(
+                callback.message.chat.id, 'reg_ntrp_no')
+            await callback.message.edit_text(message_out,
+                                             reply_markup=await markup_registration.inline_ntrp_accept(callback.message.chat.id))
 
-@router.message(Registration.ntrp)
-async def reg_finish(message: Message, state: FSMContext):
-    await state.update_data(ntrp=message.text)
-    data = await state.get_data()
-    message_out = f"{title.load_title(message.chat.id, 'reg_finish')}\n"
-    message_out += "\n".join(f"<b>{key}</b> = {value}" for key,
-                             value in data.items())
+    @router.message(Registration.ntrp)
+    async def reg_finish(message: Message, state: FSMContext):
+        ''' NEED TO ADD DESCRIPTION '''
+        await state.update_data(ntrp=message.text)
+        data = await state.get_data()
+        message_out = f"{title.load_title(message.chat.id, 'reg_finish')}\n"
 
-    await message.answer(message_out)
-    await state.clear()
+        message_out += "\n".join(f"<b>{key}</b> = {value}" for key,
+                                 value in data.items())
+
+        await message.answer(message_out)
+        await state.clear()
+

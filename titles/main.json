@@ -41,6 +41,15 @@
         },
         "reg_finish": {
             "text": "Registration is done!\n\nHere is your card:"
+        },
+        "profile_main_menu": {
+            "text": "Profile of user <b>%var%</b>"
+        },
+        "profile_btn_edit": {
+            "text": "Edit"
+        },
+        "profile_btn_delete": {
+            "text": "Delete"
         }
     },
     "ru": {
@@ -85,6 +94,15 @@
         },
         "reg_finish": {
             "text": "Отличная работа, регистрация завершена!\n\nВот твоя карточка:"
+        },
+        "profile_main_menu": {
+            "text": "Профиль пользователя <b>%var%</b>"
+        },
+        "profile_btn_edit": {
+            "text": "Редактировать"
+        },
+        "profile_btn_delete": {
+            "text": "Удалить"
         }
     }
 }
