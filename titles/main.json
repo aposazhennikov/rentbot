@@ -1,5 +1,23 @@
 {
     "en": {
+        "btn_yes": {
+            "text": "Yes"
+        },
+        "btn_no": {
+            "text": "No"
+        },
+        "btn_delete": {
+            "text": "Delete"
+        },
+        "btn_back": {
+            "text": "Back"
+        },
+        "reg_temp_asc": {
+            "text": "TEMP!: Hello, Do you wanna make a profile ?"
+        },
+        "reg_temp": {
+            "text": "Yes I wanna make a profile"
+        },
         "start_temp_menu": {
             "text": "Hello, here is commands:\n\n/start - restart\n/profile - your profile\n/court - sign up for the court\n/help - settings"
         },
@@ -93,12 +111,6 @@
         "profile_btn_edit_gender": {
             "text": "Gender"
         },
-        "profile_btn_delete_yes": {
-            "text": "Yes"
-        },
-        "profile_btn_delete_no": {
-            "text": "No"
-        },
         "profile_btn_share_contact": {
             "text": "Share contact"
         },
@@ -162,6 +174,15 @@
         "profile_title_choice_gender": {
             "text": "Indicate your gender:"
         },
+        "profile_grade_0": {
+            "text": "Basic"
+        },
+        "profile_grade_1": {
+            "text": "Advanced"
+        },
+        "profile_grade_2": {
+            "text": "the Legend Of Ovsyanka"
+        },
         "title_main_menu": {
             "text": "🏡Main menu🏡"
         },
@@ -191,6 +212,9 @@
         },
         "title_field_gender": {
             "text": "gender"
+        },
+        "title_field_grade": {
+            "text": "grade"
         },
         "title_delete_success": {
             "text": "Profile successfully deleted"
@@ -222,23 +246,38 @@
         "title_weekday_short_6": {
             "text": "su"
         },
-        "btn_back": {
-            "text": "Back"
-        },
         "court_main": {
-            "text": "Sign up for the court"
+            "text": "🎾Sign up for the court🎾"
         },
-        "court_btn_court_1": {
-            "text": "Court No. 1"
+        "court_title": {
+            "text": "Court"
         },
-        "court_btn_court_2": {
-            "text": "Court No. 2"
+        "court_another_title": {
+            "text": "View Сourt #%var% < %var% >"
+        },
+        "court_book_confirm": {
+            "text": "Is the data specified correct?"
         },
         "court_btn_location": {
             "text": "🌐Court location🌐"
         },
         "court_btn_schedule": {
             "text": "🕑View schedule🕑"
+        },
+        "court_btn_booking_all": {
+            "text": "My bookings"
+        },
+        "court_book_list": {
+            "text": "List of bookings:"
+        },
+        "court_book_list_empty": {
+            "text": "List of bookings:\nEmpty"
+        },
+        "court_delete_success": {
+            "text": "Booking deleted successfully"
+        },
+        "court_delete_fail": {
+            "text": "The booking was not deleted"
         },
         "court_schedule": {
             "text": "Schedule"
@@ -247,16 +286,64 @@
             "text": "Location"
         },
         "court_choice_day": {
-            "text": "Select a day"
+            "text": "Court #%var%\n\n<b>* Choose a day *</b>"
+        },
+        "court_choice_time_start": {
+            "text": "Court #%var% > %var%\n\n<b>* Choose a start time *</b>"
+        },
+        "court_choice_time_end": {
+            "text": "Court #%var% > %var% > %var%\n\n<b>* Choose an end time *</b>"
+        },
+        "court_choice_time_end_same": {
+            "text": "Choose an end time different from the start time"
+        },
+        "court_booked": {
+            "text": "✅Time booked successfully, have a good game"
+        },
+        "court_book_error": {
+            "text": "❌ Sorry someone has already booked this time"
+        },
+        "court_get_booking": {
+            "text": "Court #%var%\nDate: %var%\nTime: (%var% - %var%) occupied by user \n<b>%var%</b>"
+        },
+        "court_get_booking_self": {
+            "text": "✅Your booking\n\nCourt #%var%\nDate: %var%\nTime (%var% - %var%)"
+        },
+        "court_error_no_slots": {
+            "text": "❌You've reached your limit for this week.\nCome back on Monday.\n(%var%/%var%)"
         },
         "system_error_not_text": {
             "text": "bot did not receive the text format"
         },
         "system_title_none": {
             "text": "not indicated"
+        },
+        "system_link_court_first": {
+            "text": "https://yandex.ru/maps/-/CDbu4NNW"
+        },
+        "system_link_court_second": {
+            "text": "https://yandex.ru/maps/-/CDbu4F~8"
         }
     },
     "ru": {
+        "btn_yes": {
+            "text": "Да"
+        },
+        "btn_no": {
+            "text": "Нет"
+        },
+        "btn_delete": {
+            "text": "Удалить"
+        },
+        "btn_back": {
+            "text": "Назад"
+        },
+        "reg_temp_asc": {
+            "text": "ВРЕМЕНО!: Привет, ты хочешь создать профиль?"
+        },
+        "reg_temp": {
+            "text": "Да я хочу создать анкету"
+        },
         "start_temp_menu": {
             "text": "Привет, выбери пункт меню:\n\n/start - перезапуск\n/profile - твой профиль\n/court - запись на корт\n/help - настройки"
         },
@@ -350,12 +437,6 @@
         "profile_btn_edit_gender": {
             "text": "Пол"
         },
-        "profile_btn_delete_yes": {
-            "text": "Да"
-        },
-        "profile_btn_delete_no": {
-            "text": "Нет"
-        },
         "profile_btn_share_contact": {
             "text": "Поделиться номером"
         },
@@ -419,6 +500,15 @@
         "profile_title_choice_gender": {
             "text": "Укажи свой пол:"
         },
+        "profile_grade_0": {
+            "text": "Базовый"
+        },
+        "profile_grade_1": {
+            "text": "Продвинутый"
+        },
+        "profile_grade_2": {
+            "text": "ОвсяноБог"
+        },
         "title_main_menu": {
             "text": "🏡Главное меню🏡"
         },
@@ -448,6 +538,9 @@
         },
         "title_field_gender": {
             "text": "пол"
+        },
+        "title_field_grade": {
+            "text": "уровень"
         },
         "title_delete_success": {
             "text": "Анкета успешно удалена"
@@ -479,23 +572,38 @@
         "title_weekday_short_6": {
             "text": "вс"
         },
-        "btn_back": {
-            "text": "Назад"
-        },
         "court_main": {
-            "text": "Запись на корты"
+            "text": "🎾Запись на корты🎾"
         },
-        "court_btn_court_1": {
-            "text": "Корт №1"
+        "court_title": {
+            "text": "Корт"
         },
-        "court_btn_court_2": {
-            "text": "Корт №2"
+        "court_another_title": {
+            "text": "Посмотреть Корт №%var% < %var% >"
+        },
+        "court_book_confirm": {
+            "text": "Данные указаны верно?"
         },
         "court_btn_location": {
             "text": "🌐Расположение кортов🌐"
         },
         "court_btn_schedule": {
             "text": "🕑Посмотреть расписание🕑"
+        },
+        "court_btn_booking_all": {
+            "text": "🕑Мои записи🕑"
+        },
+        "court_book_list": {
+            "text": "Список записей:"
+        },
+        "court_book_list_empty": {
+            "text": "Список записей:\n-Пока пусто-"
+        },
+        "court_delete_success": {
+            "text": "Запись успешно удалена"
+        },
+        "court_delete_fail": {
+            "text": "Запись не была удалена"
         },
         "court_schedule": {
             "text": "Расписание"
@@ -504,13 +612,43 @@
             "text": "Расположение"
         },
         "court_choice_day": {
-            "text": "Выберите день"
+            "text": "Корт №%var%\n\n<b>* Выбери день *</b>"
+        },
+        "court_choice_time_start": {
+            "text": "Корт №%var% > %var%\n\n<b>* Выбери время начала *</b>"
+        },
+        "court_choice_time_end": {
+            "text": "Корт №%var% > %var% > %var%\n\n<b>* Выбери время окончания *</b>"
+        },
+        "court_choice_time_end_same": {
+            "text": "Корт №%var% > %var% > %var%\n\n<b>*Выбери время окончания*</b>, отличное от времени начала"
+        },
+        "court_booked": {
+            "text": "✅Время успешно забронировано удачной игры"
+        },
+        "court_book_error": {
+            "text": "❌ Извините, кто-то уже забронировал данное время"
+        },
+        "court_get_booking": {
+            "text": "Корт №%var%\nДата: %var%\nВремя: (%var% - %var%) занято пользователем \n<b>%var%</b>"
+        },
+        "court_get_booking_self": {
+            "text": "✅Ваша запись\n\nКорт №%var%\nДата: %var%\nВремя (%var% - %var%)"
+        },
+        "court_error_no_slots": {
+            "text": "❌Ты исчерпал свой лимит на эту неделю.\nВозвращайся в понедельник.\n(%var%/%var%)"
         },
         "system_error_not_text": {
             "text": "бот не получил текстовый формат"
         },
         "system_title_none": {
             "text": "не указано"
+        },
+        "system_link_court_first": {
+            "text": "https://yandex.ru/maps/-/CDbu4NNW"
+        },
+        "system_link_court_second": {
+            "text": "https://yandex.ru/maps/-/CDbu4F~8"
         }
     }
 }

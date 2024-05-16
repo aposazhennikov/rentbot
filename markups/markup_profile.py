@@ -12,7 +12,7 @@ from aiogram.types import KeyboardButton
 
 async def main_menu(chat_id):
     title_edit_profile = await title.load_title(chat_id, 'profile_btn_edit')
-    title_delete_profile = await title.load_title(chat_id, 'profile_btn_delete')
+    title_delete_profile = await title.load_title(chat_id, 'btn_delete')
     title_main_menu = await title.load_title(chat_id, 'title_main_menu')
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
@@ -31,7 +31,7 @@ async def edit_menu(chat_id):
     user_manager = User(None)
 
     # structure = ['firstname', 'lastname', ... etc]
-    structure = await user_manager.get_fields_profile()
+    structure = await user_manager.get_editable_fields_profile()
 
     # lets make inline buttons for each
     for item in structure:
@@ -50,8 +50,8 @@ async def edit_menu(chat_id):
 
 
 async def delete_menu(chat_id):
-    title_delete_yes = await title.load_title(chat_id, 'profile_btn_delete_yes')
-    title_delete_no = await title.load_title(chat_id, 'profile_btn_delete_no')
+    title_delete_yes = await title.load_title(chat_id, 'btn_yes')
+    title_delete_no = await title.load_title(chat_id, 'btn_no')
     title_main_menu = await title.load_title(chat_id, 'title_main_menu')
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[

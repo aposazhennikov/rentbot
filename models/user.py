@@ -1,6 +1,7 @@
 import psycopg2
 from config import *
-import time
+from datetime import datetime
+from titles import title
 
 
 class User:
@@ -14,6 +15,8 @@ class User:
             self.cursor = self.conn.cursor()
             self.scheme = DB_USER_SCHEME
             self.chat_id = chat_id
+            self.table = 'users'
+
         except psycopg2.Error as e:
             # Need to add meaningful exception
             return None
@@ -27,11 +30,12 @@ class User:
             for key in args:
                 try:
                     self.cursor.execute(
-                        f"SELECT {key} FROM {self.scheme}.users WHERE id = %s", (self.chat_id,))
+                        f"SELECT {key} FROM {self.scheme}.{self.table} WHERE id = %s", (self.chat_id,))
                     result = self.cursor.fetchall()
                     for row in result:
                         data[key] = str(row[0])
                 except psycopg2.Error as e:
+                    print(e)
                     return None
             return data
 
@@ -48,10 +52,10 @@ class User:
                     cur.execute(
                         f"""SELECT id, birth_day, ntrp, first_name, last_name, 
                         tennis_experience, phone_number, user_name, description, 
-                        created_at, gender, id_status FROM {self.scheme}.users WHERE id=%s""", (self.chat_id,))
+                        created_at, gender, id_status, grade, is_admin FROM {self.scheme}.{self.table} WHERE id=%s AND id_status = 0""", (self.chat_id,))
                     result = cur.fetchone()
 
-            if result and len(result) == 12:
+            if result and len(result) == 14:
                 # PLS NO HARDCODE
                 return {
                     "id": result[0],
@@ -66,13 +70,15 @@ class User:
                     "created_at": result[9],
                     "gender": result[10],
                     "id_status": result[11],
+                    "grade": result[12],
+                    "is_admin": result[13],
                 }
             else:
                 return None
         except psycopg2.Error as e:
             return None
 
-    async def get_fields_profile(self):
+    async def get_editable_fields_profile(self):
         args = [
             "first_name",
             "last_name",
@@ -85,12 +91,27 @@ class User:
         ]
         return args
 
+    async def get_fields_show_profile(self):
+        args = [
+            "first_name",
+            "last_name",
+            "gender",
+            "user_name",
+            "phone_number",
+            "birth_day",
+            "ntrp",
+            "tennis_experience",
+            "description",
+            "grade",
+        ]
+        return args
+
     async def update(self, params):
         '''
         this function update user in database
         '''
         print('update user')
-        update_query = f"UPDATE {self.scheme}.users SET"
+        update_query = f"UPDATE {self.scheme}.{self.table} SET"
         values = []
 
         for key, value in params.items():
@@ -105,6 +126,7 @@ class User:
                 self.cursor.execute(update_query, values)
             return True
         except psycopg2.Error as e:
+            print(e)
             return False
 
     async def delete(self):
@@ -115,7 +137,7 @@ class User:
         try:
             with self.conn:
                 self.cursor.execute(
-                    f"DELETE FROM {self.scheme}.users WHERE id = %s", (self.chat_id,))
+                    f"DELETE FROM {self.scheme}.{self.table} WHERE id = %s", (self.chat_id,))
             return True
         except psycopg2.Error as e:
             return False
@@ -126,27 +148,43 @@ class User:
         try:
             with self.conn:
                 self.cursor.execute(
-                    f"UPDATE {self.scheme}.users SET status=1 WHERE id = %s", (self.chat_id,))
+                    f"UPDATE {self.scheme}.{self.table} SET status=1 WHERE id = %s", (self.chat_id,))
             return True
         except psycopg2.Error as e:
             return False
 
     async def create(self, params):
         '''
-        this function create new user in database
+        this function creates a new user in the database or updates an existing one
         '''
         print('add user')
-        params["created_at"] = int(time.time())
+        params["id"] = self.chat_id
+        params["id_status"] = 0
+        params["created_at"] = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
         columns = ', '.join(params.keys())
         placeholders = ', '.join(['%s'] * len(params))
-        insert_query = f"INSERT INTO {self.scheme}.users ({columns}) VALUES ({placeholders})"
+
+        insert_query = f"INSERT INTO {self.scheme}.{self.table} ({columns}) VALUES ({placeholders}) ON CONFLICT (id) DO UPDATE SET "
+
+        update_params = [
+            f"{key} = EXCLUDED.{key}" for key in params.keys() if key != 'id']
+        insert_query += ', '.join(update_params)
 
         try:
             with self.conn:
                 self.cursor.execute(insert_query, list(params.values()))
             return True
         except psycopg2.Error as e:
+            print(e)
             return False
+
+    async def get_grade_list(self):
+        grades = dict()
+
+        for i in range(3):
+            grades[i] = await title.load_title(self.chat_id, f'profile_grade_{i}')
+
+        return grades
 
     def get_all(self):
         '''

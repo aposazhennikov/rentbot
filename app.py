@@ -11,7 +11,8 @@ from handlers.court.court_main import router_court
 from handlers.profile.profile_callback import router_profile_callback
 from handlers.court.court_callback import router_court_callback
 from handlers.profile.change_field import router_profile_change_field
-from handlers.callback import router_main_callback
+from handlers.callback import router_main_callback  # , router_callback
+# from handlers.callback import router_callback
 from logs import rent_logger
 # file and console loger $path:/logs/errors.log
 # this makes the bot slower
@@ -47,6 +48,9 @@ async def main() -> None:
     # ===== COURT BLOCK =====
     dp.include_router(router_court)
     dp.include_router(router_court_callback)
+
+    # ===== CALLBACKS =====
+    # dp.include_router(router_callback)
 
     # And the run events dispatching
     await dp.start_polling(bot)

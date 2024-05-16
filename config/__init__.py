@@ -12,3 +12,5 @@ DB_USER_SCHEME = 'api'
 # Bot token
 BOT_TOKEN = getenv('BOT_TOKEN')
 BOT_MODE = 'dev'  # prod
+BOT_GROUP_ID = -1002109066166
+BOT_TOPIC_ID = 7
