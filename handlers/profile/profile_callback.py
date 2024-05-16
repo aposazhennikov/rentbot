@@ -48,7 +48,7 @@ async def handle_profile_callback(callback: CallbackQuery, state=FSMContext):
             # user_manager = User(callback.message.chat.id)
             # user_manager.delete()
             user_manager = User(callback.message.chat.id)
-            user_manager.update({'id_status': 1})
+            await user_manager.update({'id_status': 1})
 
             await callback.answer(f'{action} {field}')
             await callback.message.edit_text(text=await title.load_title(callback.message.chat.id, 'title_delete_success'), reply_markup=None)
